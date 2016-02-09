@@ -11,10 +11,19 @@ namespace FindFast.Infrastructure.Tests
     public class RealEstateAdRepositoryTests
     {
         [Fact]
-        public void PassingTest()
+        public void InsertTest()
         {
             var repo = new RealEstateAdRepository();
+            repo.InsertAsync();
             Assert.Equal(4, Add(2, 2));
+        }
+
+        [Fact]
+        public async void GetAllTest()
+        {
+            var repo = new RealEstateAdRepository();
+            var list = await repo.FindAllAsync();
+            Assert.True(list.Count() > 0);
         }
 
         [Fact]

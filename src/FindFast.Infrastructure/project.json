@@ -1,0 +1,21 @@
+﻿{
+  "version": "1.0.0-final",
+  "description": "FindFast.Infrastructure Class Library",
+  "authors": [ "Fabien" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "dependencies": {
+    "FindFast.Domain": "1.0.0-final"
+  },
+
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "MongoDB.Driver": "2.2.3"
+      }
+    }
+  
+    }
+  }
+

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D21BBF60-2DF1-4F7D-90A2-926A7EB2EBD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E3CED91-D885-4E15-A175-8A8ADB3FD62D}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		mongod.bat = mongod.bat
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FindFast", "src\FindFast\FindFast.xproj", "{D78977BE-24E7-4E81-A4D7-FCC47EEFD54F}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FindFast.Infrastructure", "src\FindFast.Infrastructure\FindFast.Infrastructure.xproj", "{719FC4BC-02FC-45E9-9AFC-F2D373F0A40B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FindFast.Domain", "src\FindFast.Domain\FindFast.Domain.xproj", "{C0A57611-9D2B-4C43-BC62-D209C6196481}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTesting", "UnitTesting", "{25A4C85D-5770-48BC-BFFB-40415C6D3EF3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FindFast.Infrastructure.Tests", "FindFast.Infrastructure.Tests\FindFast.Infrastructure.Tests.xproj", "{B81C78F7-EFD2-4525-B9D2-0FFB343A3F2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D78977BE-24E7-4E81-A4D7-FCC47EEFD54F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78977BE-24E7-4E81-A4D7-FCC47EEFD54F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78977BE-24E7-4E81-A4D7-FCC47EEFD54F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78977BE-24E7-4E81-A4D7-FCC47EEFD54F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719FC4BC-02FC-45E9-9AFC-F2D373F0A40B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719FC4BC-02FC-45E9-9AFC-F2D373F0A40B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719FC4BC-02FC-45E9-9AFC-F2D373F0A40B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719FC4BC-02FC-45E9-9AFC-F2D373F0A40B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A57611-9D2B-4C43-BC62-D209C6196481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A57611-9D2B-4C43-BC62-D209C6196481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A57611-9D2B-4C43-BC62-D209C6196481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A57611-9D2B-4C43-BC62-D209C6196481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81C78F7-EFD2-4525-B9D2-0FFB343A3F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81C78F7-EFD2-4525-B9D2-0FFB343A3F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81C78F7-EFD2-4525-B9D2-0FFB343A3F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81C78F7-EFD2-4525-B9D2-0FFB343A3F2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D78977BE-24E7-4E81-A4D7-FCC47EEFD54F} = {D21BBF60-2DF1-4F7D-90A2-926A7EB2EBD3}
+		{719FC4BC-02FC-45E9-9AFC-F2D373F0A40B} = {D21BBF60-2DF1-4F7D-90A2-926A7EB2EBD3}
+		{C0A57611-9D2B-4C43-BC62-D209C6196481} = {D21BBF60-2DF1-4F7D-90A2-926A7EB2EBD3}
+		{25A4C85D-5770-48BC-BFFB-40415C6D3EF3} = {D21BBF60-2DF1-4F7D-90A2-926A7EB2EBD3}
+		{B81C78F7-EFD2-4525-B9D2-0FFB343A3F2C} = {25A4C85D-5770-48BC-BFFB-40415C6D3EF3}
+	EndGlobalSection
+EndGlobal

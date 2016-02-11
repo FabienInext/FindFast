@@ -1,4 +1,4 @@
-﻿/// <binding Clean='clean' />
+﻿/// <binding AfterBuild='moveToLibs' Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -43,3 +43,35 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
+
+
+
+
+var paths = {
+    npmSrc: "./node_modules/",
+    libTarget: "./wwwroot/libs/"
+};
+
+var libsToMove = [
+   paths.npmSrc + '/angular2/bundles/angular2-polyfills.js',
+   paths.npmSrc + '/systemjs/dist/system.js',
+   paths.npmSrc + '/systemjs/dist/system-polyfills.js',
+   paths.npmSrc + '/rxjs/bundles/Rx.js',
+   paths.npmSrc + '/angular2/bundles/angular2.dev.js',
+   paths.npmSrc + '/es6-shim/es6-shim.min.js'
+];
+gulp.task('moveToLibs', function () {
+    return gulp.src(libsToMove).pipe(gulp.dest(paths.libTarget));
+});
+
+var inject = require('gulp-inject');
+ 
+gulp.task('injectjscss', function () {
+  var target = gulp.src('Views/Shared/_Layout.cshtml');
+  // It's not necessary to read the files (will speed up things), we're only after their paths: 
+  var sources = gulp.src(['wwwroot/lib/**/*.js', 'wwwroot/css/*.css'], {read: false});
+ 
+  return target.pipe(inject(sources))
+  .pipe(gulp.dest('Views/Shared'));
+   
+});

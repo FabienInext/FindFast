@@ -5,6 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - FindFast</title>
 
+        <!-- 1. Load libraries -->
+        <script src="libs/es6-shim.min.js"></script>
+        <script src="libs/system-polyfills.js"></script>
+        <script src="libs/angular2-polyfills.js"></script>
+        <script src="libs/system.js"></script>
+        <script src="libs/rx.js"></script>
+        <script src="libs/angular2.dev.js"></script>
+        <!-- 2. Configure SystemJS -->
+     
+        <script>
+        "use strict";
+        System.config({
+            packages: {
+                appscript: {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        </script>
+        <script>
+
+        System.import('appscript/boot')
+              .then(null, console.error.bind(console));
+        </script>
+
         <environment names="Development">
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
             <link rel="stylesheet" href="~/css/site.css" />
@@ -47,6 +72,7 @@
             </footer>
         </div>
 
+
         <environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -65,5 +91,9 @@
         </environment>
 
         @RenderSection("scripts", required: false)
+
+        <!-- inject:js -->       
+         
+        <!-- endinject -->
     </body>
 </html>

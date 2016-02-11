@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FindFast.Infrastructure
 {
-    public class RealEstateAdRepository
+    public class RealEstateAdRepository : IRealEstateAdRepository
     {
         [BsonRepresentation(BsonType.ObjectId)]
         protected static IMongoClient _client;
@@ -39,6 +39,7 @@ namespace FindFast.Infrastructure
 
         public async Task<IEnumerable<RealEstate>> FindAllAsync()
         {
+            
             var collection = _database.GetCollection<BsonDocument>("realestate");
             var result = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 

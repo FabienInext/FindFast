@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using FindFast.Models;
 using FindFast.Services;
+using FindFast.Infrastructure;
+using Microsoft.AspNet.Http;
 
 namespace FindFast
 {
@@ -56,9 +58,26 @@ namespace FindFast
 
             services.AddMvc();
 
+           
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddTransient<IRealEstateAdRepository, RealEstateAdRepository>();
+        }
+
+        private static void HandleMapTest(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("Map Test Successful");
+            });
+        }
+
+        public void ConfigureMapping(IApplicationBuilder app)
+        {
+            app.Map("/maptest", HandleMapTest);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +114,7 @@ namespace FindFast
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseApplicationInsightsExceptionTelemetry();
-
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseIdentity();
@@ -108,6 +127,8 @@ namespace FindFast
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ConfigureMapping(app);
         }
 
         // Entry point for the application.

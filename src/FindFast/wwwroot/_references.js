@@ -13,6 +13,7 @@
 /// <reference path="libs/angular2.dev.js" />
 /// <reference path="libs/angular2-polyfills.js" />
 /// <reference path="libs/es6-shim.min.js" />
+/// <reference path="libs/http.dev.js" />
 /// <reference path="libs/rx.js" />
 /// <reference path="libs/system.js" />
 /// <reference path="libs/system-polyfills.js" />

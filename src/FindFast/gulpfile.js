@@ -58,7 +58,8 @@ var libsToMove = [
    paths.npmSrc + '/systemjs/dist/system-polyfills.js',
    paths.npmSrc + '/rxjs/bundles/Rx.js',
    paths.npmSrc + '/angular2/bundles/angular2.dev.js',
-   paths.npmSrc + '/es6-shim/es6-shim.min.js'
+   paths.npmSrc + '/es6-shim/es6-shim.min.js',
+   paths.npmSrc + '/angular2/bundles/http.dev.js'
 ];
 gulp.task('moveToLibs', function () {
     return gulp.src(libsToMove).pipe(gulp.dest(paths.libTarget));

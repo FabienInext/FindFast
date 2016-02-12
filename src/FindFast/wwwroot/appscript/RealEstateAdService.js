@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1) {
+System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,16 +8,20 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
+    var core_1, realEstateAd_1, http_1;
     var RealEstateAdService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (realEstateAd_1_1) {
+                realEstateAd_1 = realEstateAd_1_1;
+            },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             RealEstateAdService = (function () {
                 function RealEstateAdService(http) {
@@ -28,7 +32,19 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
                     ];*/
                 }
                 RealEstateAdService.prototype.getRealEstateList = function () {
-                    return this.http.get('api/realestatead/GetAll');
+                    return this.http.get('api/realestatead/GetAll')
+                        .map(function (responsedata) {
+                        return responsedata.json();
+                    })
+                        .map(function (results) {
+                        var realEstateAds = [];
+                        if (results) {
+                            results.forEach(function (result) {
+                                realEstateAds.push(new realEstateAd_1.RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
+                            });
+                        }
+                        return realEstateAds;
+                    });
                     //return Promise.resolve(this.realEstateList);
                 };
                 RealEstateAdService = __decorate([
@@ -41,4 +57,4 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=RealEstateAdService.js.map
+//# sourceMappingURL=realEstateAdService.js.map

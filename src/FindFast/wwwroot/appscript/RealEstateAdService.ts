@@ -1,6 +1,7 @@
 ﻿import {Injectable} from 'angular2/core';
 import {RealEstateAd}     from './realEstateAd';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class RealEstateAdService {
@@ -14,8 +15,46 @@ export class RealEstateAdService {
     }
 
     getRealEstateList() {
-        return this.http.get('api/realestatead/GetAll');
+        return this.http.get('api/realestatead/GetAll')
+            .map((responsedata) => {
+                return responsedata.json();
+            })
+            .map((results: Array<any>) => {
+                let realEstateAds: Array<RealEstateAd> = [];
+
+                if (results) {
+                    results.forEach((result) => {
+                        realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface);
+
+                    });
+                }
+
+                return realEstateAds;
+            });
+            
         
         //return Promise.resolve(this.realEstateList);
     }  
+
+    /*getTasks() {
+    // return an observable
+    return this.http.get('/api/v1/tasks.json')
+    .map( (responseData) => {
+      return responseData.json();
+    })
+    .map((tasks: Array<any>) => {
+      let result:Array<Task> = [];
+      if (tasks) {
+        tasks.forEach((task) => {
+          result.push(
+                     new Task(task.id, 
+                              task.description,
+                              task.dueDate,
+                              task.complete));
+        });
+      }
+      return result;
+    });
+  }
+}*/
 }

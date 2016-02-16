@@ -26,6 +26,12 @@ namespace FindFast.WebApiController
             return await _realEstateAdRepository.FindAllAsync();
         }
 
+        [HttpGet("GetBy/{term}")]
+        public async Task<IEnumerable<RealEstate>> GetBy(string term)
+        {
+            return await _realEstateAdRepository.FindAllAsync(term);
+        }
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()

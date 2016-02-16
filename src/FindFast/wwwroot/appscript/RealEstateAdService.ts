@@ -15,7 +15,8 @@ export class RealEstateAdService {
     }
 
     getRealEstateList() {
-        return this.http.get('api/realestatead/GetAll')
+        return this.getGenericRealEstateList('api/realestatead/GetAll');
+        /*return this.http.get('api/realestatead/GetAll')
             .map((responsedata) => {
                 return responsedata.json();
             })
@@ -24,17 +25,46 @@ export class RealEstateAdService {
 
                 if (results) {
                     results.forEach((result) => {
-                        realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface);
+                        realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
 
                     });
                 }
 
                 return realEstateAds;
+            });*/
+    }
+
+    getRealEstateListBy(term: string) {
+        return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+    }
+
+    getGenericRealEstateList(url: string) {
+        return this.http.get(url)
+            .map((responsedata) => {
+                return responsedata.json();
+            })
+            .map((results: Array<any>) => {
+                let realEstateAds: Array<RealEstateAd> = [];
+
+                if (results) {
+                    results.forEach((result) => {
+                        realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
+
+                    });
+
+                }
+
+                return realEstateAds;
             });
+    }
+}
+
+         
+
             
         
         //return Promise.resolve(this.realEstateList);
-    }  
+
 
     /*getTasks() {
     // return an observable
@@ -57,4 +87,3 @@ export class RealEstateAdService {
     });
   }
 }*/
-}

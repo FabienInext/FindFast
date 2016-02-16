@@ -32,7 +32,29 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
                     ];*/
                 }
                 RealEstateAdService.prototype.getRealEstateList = function () {
-                    return this.http.get('api/realestatead/GetAll')
+                    return this.getGenericRealEstateList('api/realestatead/GetAll');
+                    /*return this.http.get('api/realestatead/GetAll')
+                        .map((responsedata) => {
+                            return responsedata.json();
+                        })
+                        .map((results: Array<any>) => {
+                            let realEstateAds: Array<RealEstateAd> = [];
+            
+                            if (results) {
+                                results.forEach((result) => {
+                                    realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
+            
+                                });
+                            }
+            
+                            return realEstateAds;
+                        });*/
+                };
+                RealEstateAdService.prototype.getRealEstateListBy = function (term) {
+                    return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+                };
+                RealEstateAdService.prototype.getGenericRealEstateList = function (url) {
+                    return this.http.get(url)
                         .map(function (responsedata) {
                         return responsedata.json();
                     })
@@ -45,7 +67,6 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
                         }
                         return realEstateAds;
                     });
-                    //return Promise.resolve(this.realEstateList);
                 };
                 RealEstateAdService = __decorate([
                     core_1.Injectable(), 
@@ -57,4 +78,26 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
         }
     }
 });
-//# sourceMappingURL=realEstateAdService.js.map
+//return Promise.resolve(this.realEstateList);
+/*getTasks() {
+// return an observable
+return this.http.get('/api/v1/tasks.json')
+.map( (responseData) => {
+  return responseData.json();
+})
+.map((tasks: Array<any>) => {
+  let result:Array<Task> = [];
+  if (tasks) {
+    tasks.forEach((task) => {
+      result.push(
+                 new Task(task.id,
+                          task.description,
+                          task.dueDate,
+                          task.complete));
+    });
+  }
+  return result;
+});
+}
+}*/
+//# sourceMappingURL=RealEstateAdService.js.map

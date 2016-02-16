@@ -27,6 +27,15 @@ namespace FindFast.Infrastructure.Tests
         }
 
         [Fact]
+        public async void GetByTest()
+        {
+            //Test title
+            var repo = new RealEstateAdRepository();
+            var list = await repo.FindAllAsync("Ta");
+            Assert.True(list.Count() > 0);
+        }
+
+        [Fact]
         public void FailingTest()
         {
             Assert.Equal(5, Add(2, 2));

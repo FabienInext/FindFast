@@ -16,4 +16,4 @@ System.register([], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=realEstateAd.js.map
+//# sourceMappingURL=RealEstateAd.js.map

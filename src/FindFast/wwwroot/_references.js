@@ -3,6 +3,7 @@
 /// <reference path="appscript/app.js" />
 /// <reference path="appscript/boot.js" />
 /// <reference path="appscript/realestatead.js" />
+/// <reference path="appscript/realestateadlist.component.js" />
 /// <reference path="appscript/realestateadlist.js" />
 /// <reference path="appscript/realestateadservice.js" />
 /// <reference path="js/site.js" />

@@ -37,11 +37,18 @@ namespace FindFast.Infrastructure
            await collection.InsertOneAsync(realEstate.ToBsonDocument());
         }
 
-        public async Task<IEnumerable<RealEstate>> FindAllAsync()
+        public async Task<IEnumerable<RealEstate>> FindAllAsync(string title = null)
         {
             
             var collection = _database.GetCollection<BsonDocument>("realestate");
-            var result = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
+
+            var filter = FilterDefinition<BsonDocument>.Empty;
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                filter = Builders<BsonDocument>.Filter.Regex("Title", new BsonRegularExpression(@"^" + title + ""));
+            }
+            var result = await collection.Find(filter).ToListAsync();
 
             var realEstates = new List<RealEstate>();
 

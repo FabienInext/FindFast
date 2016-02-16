@@ -31,29 +31,31 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
                         { "title": "Title2", "description": "description2", "price": 20000, "surface": 45 }
                     ];*/
                 }
+                RealEstateAdService.prototype.insertRealEstateAd = function (realEstateAd) {
+                    var _this = this;
+                    var body = JSON.stringify(realEstateAd);
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.post('api/realestatead/insert', body, options).map(function (res) { return res.json(); })
+                        .subscribe(function (data) { return _this.saveJwt(data.id_token); }, function (err) { return _this.logError(err); }, function () { return console.log('Authentication Complete'); });
+                    ;
+                };
+                RealEstateAdService.prototype.saveJwt = function (jwt) {
+                    if (jwt) {
+                        localStorage.setItem('id_token', jwt);
+                    }
+                };
+                RealEstateAdService.prototype.logError = function (error) {
+                };
                 RealEstateAdService.prototype.getRealEstateList = function () {
                     return this.getGenericRealEstateList('api/realestatead/GetAll');
-                    /*return this.http.get('api/realestatead/GetAll')
-                        .map((responsedata) => {
-                            return responsedata.json();
-                        })
-                        .map((results: Array<any>) => {
-                            let realEstateAds: Array<RealEstateAd> = [];
-            
-                            if (results) {
-                                results.forEach((result) => {
-                                    realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
-            
-                                });
-                            }
-            
-                            return realEstateAds;
-                        });*/
                 };
                 RealEstateAdService.prototype.getRealEstateListBy = function (term) {
+                    console.log('getRealEstateListBy');
                     return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
                 };
                 RealEstateAdService.prototype.getGenericRealEstateList = function (url) {
+                    console.log('getGenericRealEstateList');
                     return this.http.get(url)
                         .map(function (responsedata) {
                         return responsedata.json();

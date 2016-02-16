@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FindFast.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,10 +12,18 @@ namespace FindFast.Infrastructure.Tests
     public class RealEstateAdRepositoryTests
     {
         [Fact]
-        public void InsertTest()
+        public async void InsertTest()
         {
+            var realEstate = new RealEstate
+            {
+                Title = "Test title",
+                Description = "Test description",
+                Price = 1234,
+                Surface = 38
+            };
+
             var repo = new RealEstateAdRepository();
-            repo.InsertAsync();
+            await repo.InsertAsync(realEstate);
             Assert.Equal(4, Add(2, 2));
         }
 

@@ -25,6 +25,12 @@ namespace FindFast.WebApiController
         {
             return await _realEstateAdRepository.FindAllAsync();
         }
+            
+        [HttpPost("Insert")]
+        public async Task Post([FromBody]RealEstate value)
+        {
+            await _realEstateAdRepository.InsertAsync(value);
+        }
 
         [HttpGet("GetBy/{term}")]
         public async Task<IEnumerable<RealEstate>> GetBy(string term)

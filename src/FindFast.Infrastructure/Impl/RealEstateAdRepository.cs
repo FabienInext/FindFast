@@ -23,18 +23,11 @@ namespace FindFast.Infrastructure
             _database = _client.GetDatabase("FindFast");
         }
 
-        public async void InsertAsync()
+        public async Task InsertAsync(RealEstate realEstate)
         {
-            var collection = _database.GetCollection<BsonDocument>("realestate");
-            var realEstate = new RealEstate
-            {
-                Title = "Test title",
-                Description = "Test description",
-                Price = 1234,
-                Surface = 38
-            };
-
-           await collection.InsertOneAsync(realEstate.ToBsonDocument());
+           var collection = _database.GetCollection<BsonDocument>("realestate");
+            
+            await collection.InsertOneAsync(realEstate.ToBsonDocument());
         }
 
         public async Task<IEnumerable<RealEstate>> FindAllAsync(string title = null)

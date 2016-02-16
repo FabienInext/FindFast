@@ -1,0 +1,6 @@
+﻿<div>
+    <form [ngFormModel]="formGroup" (submit)="submitRealEstateAd()">
+            <p>Title: <input ngControl="title"><span *ngIf="!title.valid"> [required]</span></p>
+            <button type="submit">Create</button>
+    </form>
+</div>

@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="#realEstateAd of realEstateAdList">
+            <tr *ngFor="#realEstateAd of realEstateAdList | async">
                 <td>{{realEstateAd.title}}</td>
                 <td>{{realEstateAd.description}}</td>
                 <td>{{realEstateAd.price}}</td>

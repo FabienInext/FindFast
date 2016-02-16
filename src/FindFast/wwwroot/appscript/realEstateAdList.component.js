@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './realEstateAdService'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './realEstateAdService', 'rxjs/Rx'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService'], f
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, realEstateAdService_1;
+    var core_1, common_1, realEstateAdService_1, Rx_1;
     var RealEstateAdListComponent;
     return {
         setters:[
@@ -20,25 +20,23 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService'], f
             },
             function (realEstateAdService_1_1) {
                 realEstateAdService_1 = realEstateAdService_1_1;
+            },
+            function (Rx_1_1) {
+                Rx_1 = Rx_1_1;
             }],
         execute: function() {
             RealEstateAdListComponent = (function () {
                 function RealEstateAdListComponent(_realEstateAdService) {
-                    var _this = this;
                     this._realEstateAdService = _realEstateAdService;
                     this.term = new common_1.Control();
-                    this.term.valueChanges
-                        .debounceTime(400)
-                        .distinctUntilChanged()
-                        .subscribe(function (term) { return _this._realEstateAdService.getRealEstateListBy(_this.term.value)
-                        .subscribe(function (res) { return _this.loadRealEstateAdList(res); }); });
+                    //
                 }
                 RealEstateAdListComponent.prototype.getRealEstateAdList = function () {
                     var _this = this;
-                    this._realEstateAdService.getRealEstateList().subscribe(function (res) { return _this.loadRealEstateAdList(res); });
-                };
-                RealEstateAdListComponent.prototype.loadRealEstateAdList = function (res) {
-                    this.realEstateAdList = res;
+                    this.realEstateAdList = Rx_1.Observable.concat(this._realEstateAdService.getRealEstateList(), this.term.valueChanges
+                        .debounceTime(400)
+                        .distinctUntilChanged()
+                        .switchMap(function (term) { return _this._realEstateAdService.getRealEstateListBy(_this.term.value); }));
                 };
                 RealEstateAdListComponent.prototype.ngOnInit = function () {
                     this.getRealEstateAdList();

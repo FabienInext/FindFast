@@ -1,6 +1,6 @@
 ﻿import {Injectable} from 'angular2/core';
 import {RealEstateAd}     from './realEstateAd';
-import {HTTP_PROVIDERS, Http} from 'angular2/http';
+import {HTTP_PROVIDERS, Http, Headers, RequestOptions} from 'angular2/http';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -14,31 +14,37 @@ export class RealEstateAdService {
         ];*/
     }
 
+    insertRealEstateAd(realEstateAd: RealEstateAd) {
+        let body = JSON.stringify(realEstateAd);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        this.http.post('api/realestatead/insert', body, options).map(res => res.json())
+            .subscribe(
+            data => this.saveJwt(data.id_token),
+            err => this.logError(err),
+            () => console.log('Authentication Complete')
+            );;
+    }
+    saveJwt(jwt) {
+        if (jwt) {
+            localStorage.setItem('id_token', jwt)
+        }
+    }
+
+    logError(error) {
+    }
+
     getRealEstateList() {
-        return this.getGenericRealEstateList('api/realestatead/GetAll');
-        /*return this.http.get('api/realestatead/GetAll')
-            .map((responsedata) => {
-                return responsedata.json();
-            })
-            .map((results: Array<any>) => {
-                let realEstateAds: Array<RealEstateAd> = [];
-
-                if (results) {
-                    results.forEach((result) => {
-                        realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
-
-                    });
-                }
-
-                return realEstateAds;
-            });*/
+        return this.getGenericRealEstateList('api/realestatead/GetAll');      
     }
 
     getRealEstateListBy(term: string) {
+        console.log('getRealEstateListBy');
         return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
     }
 
     getGenericRealEstateList(url: string) {
+        console.log('getGenericRealEstateList');
         return this.http.get(url)
             .map((responsedata) => {
                 return responsedata.json();

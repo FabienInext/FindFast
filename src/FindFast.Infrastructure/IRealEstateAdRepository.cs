@@ -7,6 +7,6 @@ namespace FindFast.Infrastructure
     public interface IRealEstateAdRepository
     {
         Task<IEnumerable<RealEstate>> FindAllAsync(string title = null);
-        void InsertAsync();
+        Task InsertAsync(RealEstate realEstate);
     }
 }

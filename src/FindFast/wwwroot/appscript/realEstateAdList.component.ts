@@ -3,6 +3,7 @@ import {Control} from 'angular2/common';
 import {RealEstateAdService} from './realEstateAdService';
 import {RealEstateAd} from "./realEstateAd"
 import {BaseRequestOptions, Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 
 
 @Component({
@@ -11,25 +12,24 @@ import {BaseRequestOptions, Http, Response} from 'angular2/http';
     providers: [RealEstateAdService]
 })
 export class RealEstateAdListComponent implements OnInit {
-    public realEstateAdList: RealEstateAd[];
+    public realEstateAdList: Observable<Array<RealEstateAd>>;
     term = new Control();
 
-    constructor(private _realEstateAdService: RealEstateAdService) {
-        this.term.valueChanges
-            .debounceTime(400)
-            .distinctUntilChanged()
-            .subscribe(term => this._realEstateAdService.getRealEstateListBy(this.term.value)
-                .subscribe((res: Array<RealEstateAd>) => this.loadRealEstateAdList(res))); 
+    constructor(private _realEstateAdService: RealEstateAdService) { 
+        //
     }
 
     getRealEstateAdList() {    
-        this._realEstateAdService.getRealEstateList().subscribe((res: Array<RealEstateAd>) => this.loadRealEstateAdList(res));       
+     
+        this.realEstateAdList = Observable.concat(
+              this._realEstateAdService.getRealEstateList(),
+              this.term.valueChanges
+                .debounceTime(400)
+                .distinctUntilChanged()
+                .switchMap(term => this._realEstateAdService.getRealEstateListBy(this.term.value))
+            
+        );
     }
-
-    loadRealEstateAdList(res: Array<RealEstateAd>) {
-        this.realEstateAdList = res;
-    }
-
 
     ngOnInit() {
         this.getRealEstateAdList();

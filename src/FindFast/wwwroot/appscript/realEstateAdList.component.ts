@@ -4,19 +4,25 @@ import {RealEstateAdService} from './realEstateAdService';
 import {RealEstateAd} from "./realEstateAd"
 import {BaseRequestOptions, Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import { InfiniteScroll } from 'angular2-infinite-scroll';
 
 
 @Component({
     selector: 'realEstateAdList',
     templateUrl: 'appscript/realEstateAdList.component.html',
-    providers: [RealEstateAdService]
+    providers: [RealEstateAdService],
+    directives: [InfiniteScroll]
 })
 export class RealEstateAdListComponent implements OnInit {
     public realEstateAdList: Observable<Array<RealEstateAd>>;
     term = new Control();
 
     constructor(private _realEstateAdService: RealEstateAdService) { 
-        //
+        console.log('test!!')
+    }
+
+    onScroll() {
+        console.log('scrolled!!')
     }
 
     getRealEstateAdList() {    

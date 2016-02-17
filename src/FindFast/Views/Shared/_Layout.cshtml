@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - FindFast</title>
-
+        <script>document.write('<base href="' + document.location + '" />');</script>
         <!-- 1. Load libraries -->
         <script src="libs/es6-shim.min.js"></script>
         <script src="libs/system-polyfills.js"></script>
@@ -13,8 +13,10 @@
         <script src="libs/rx.js"></script>
         <script src="libs/angular2.dev.js"></script>
         <script src="libs/http.dev.js"></script>
+        <script src="libs/angular2-infinite-scroll.js"></script>
+        <script src="libs/router.dev.js"></script>
         <!-- 2. Configure SystemJS -->
-     
+
         <script>
         "use strict";
         System.config({

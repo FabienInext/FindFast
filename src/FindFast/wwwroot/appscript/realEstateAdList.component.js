@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './realEstateAdService', 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './realEstateAdService', 'rxjs/Rx', 'angular2-infinite-scroll'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', 'r
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, realEstateAdService_1, Rx_1;
+    var core_1, common_1, realEstateAdService_1, Rx_1, angular2_infinite_scroll_1;
     var RealEstateAdListComponent;
     return {
         setters:[
@@ -23,14 +23,20 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', 'r
             },
             function (Rx_1_1) {
                 Rx_1 = Rx_1_1;
+            },
+            function (angular2_infinite_scroll_1_1) {
+                angular2_infinite_scroll_1 = angular2_infinite_scroll_1_1;
             }],
         execute: function() {
             RealEstateAdListComponent = (function () {
                 function RealEstateAdListComponent(_realEstateAdService) {
                     this._realEstateAdService = _realEstateAdService;
                     this.term = new common_1.Control();
-                    //
+                    console.log('test!!');
                 }
+                RealEstateAdListComponent.prototype.onScroll = function () {
+                    console.log('scrolled!!');
+                };
                 RealEstateAdListComponent.prototype.getRealEstateAdList = function () {
                     var _this = this;
                     this.realEstateAdList = Rx_1.Observable.concat(this._realEstateAdService.getRealEstateList(), this.term.valueChanges
@@ -45,7 +51,8 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', 'r
                     core_1.Component({
                         selector: 'realEstateAdList',
                         templateUrl: 'appscript/realEstateAdList.component.html',
-                        providers: [realEstateAdService_1.RealEstateAdService]
+                        providers: [realEstateAdService_1.RealEstateAdService],
+                        directives: [angular2_infinite_scroll_1.InfiniteScroll]
                     }), 
                     __metadata('design:paramtypes', [realEstateAdService_1.RealEstateAdService])
                 ], RealEstateAdListComponent);

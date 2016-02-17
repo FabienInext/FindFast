@@ -59,7 +59,9 @@ var libsToMove = [
    paths.npmSrc + '/rxjs/bundles/Rx.js',
    paths.npmSrc + '/angular2/bundles/angular2.dev.js',
    paths.npmSrc + '/es6-shim/es6-shim.min.js',
-   paths.npmSrc + '/angular2/bundles/http.dev.js'
+   paths.npmSrc + '/angular2/bundles/http.dev.js',
+   paths.npmSrc + '/angular2/bundles/router.dev.js',
+   paths.npmSrc + '/angular2-infinite-scroll/bundles/angular2-infinite-scroll.js'
 ];
 gulp.task('moveToLibs', function () {
     return gulp.src(libsToMove).pipe(gulp.dest(paths.libTarget));

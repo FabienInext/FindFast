@@ -1,24 +1,28 @@
 ﻿<div>
     <input type="text" [ngFormControl]="term" />
 
-    Real estate list
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Surface</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="#realEstateAd of realEstateAdList | async">
-                <td>{{realEstateAd.title}}</td>
-                <td>{{realEstateAd.description}}</td>
-                <td>{{realEstateAd.price}}</td>
-                <td>{{realEstateAd.surface}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div infinite-scroll
+         [infiniteScrollDistance]="1000"
+         (scrolled)="onScroll()" >
+        Real estate list
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Surface</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#realEstateAd of realEstateAdList | async">
+                    <td>{{realEstateAd.title}}</td>
+                    <td>{{realEstateAd.description}}</td>
+                    <td>{{realEstateAd.price}}</td>
+                    <td>{{realEstateAd.surface}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     
 </div>

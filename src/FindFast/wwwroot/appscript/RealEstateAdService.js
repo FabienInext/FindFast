@@ -51,8 +51,13 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
                     return this.getGenericRealEstateList('api/realestatead/GetAll');
                 };
                 RealEstateAdService.prototype.getRealEstateListBy = function (term) {
-                    console.log('getRealEstateListBy');
-                    return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+                    if (term.length > 0) {
+                        console.log('getRealEstateListBy');
+                        return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+                    }
+                    else {
+                        return this.getRealEstateList();
+                    }
                 };
                 RealEstateAdService.prototype.getGenericRealEstateList = function (url) {
                     console.log('getGenericRealEstateList');
@@ -102,4 +107,4 @@ return this.http.get('/api/v1/tasks.json')
 });
 }
 }*/
-//# sourceMappingURL=RealEstateAdService.js.map
+//# sourceMappingURL=realEstateAdService.js.map

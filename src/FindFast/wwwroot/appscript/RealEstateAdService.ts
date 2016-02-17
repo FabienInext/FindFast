@@ -39,8 +39,13 @@ export class RealEstateAdService {
     }
 
     getRealEstateListBy(term: string) {
-        console.log('getRealEstateListBy');
-        return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+        if (term.length > 0) {
+            console.log('getRealEstateListBy');
+            return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+        }
+        else {
+            return this.getRealEstateList();
+        } 
     }
 
     getGenericRealEstateList(url: string) {

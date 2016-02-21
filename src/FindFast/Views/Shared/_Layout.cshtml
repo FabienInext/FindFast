@@ -14,23 +14,51 @@
         <script src="libs/angular2.dev.js"></script>
         <script src="libs/http.dev.js"></script>
         <script src="libs/angular2-infinite-scroll.js"></script>
-        <script src="libs/router.dev.js"></script>
+        <script src="libs/router.dev.js"></script>      
+       <!-- <script src="libs/angular2-modal/index.js"></script>
+        <script src="libs/commonmodals/okonlymodal.js"></script>
+        <script src="libs/commonmodals/yesnomodal.js"></script>
+        <script src="libs/components/bootstrapmodalcontainer.js"></script>
+        <script src="libs/components/modalbackdrop.js"></script>
+        <script src="libs/models/icustommodal.js"></script>
+        <script src="libs/models/modalconfig.js"></script>
+        <script src="libs/models/modaldialoginstance.js"></script>
+        <script src="libs/providers/modal.js"></script>-->
         <!-- 2. Configure SystemJS -->
 
         <script>
         "use strict";
         System.config({
+             /*meta: {
+               
+                'libs/angular2-infinite-scroll.js': {
+                format: 'global',
+                exports: 'angular2-infinite-scroll' 
+              }
+            },*/
             packages: {
                 appscript: {
-                    defaultExtension: 'js'
-                }
+                    defaultExtension: 'js',
+                    map: {
+                        'angular2-modal' : 'libs/angular2-modal'/*,
+                        'angular2-infinite-scroll' : 'libs'*/
+                }              
+            },
+            'libs/angular2-modal' :{
+                defaultExtension: 'js',
+                main: 'index.js'
+            },
+             'libs' :{
+                defaultExtension: 'js',
+                main : 'angular2-infinite-scroll.js'
             }
-        });
+        }});
         </script>
         <script>
 
         System.import('appscript/boot')
               .then(null, console.error.bind(console));
+       
         </script>
 
         <environment names="Development">

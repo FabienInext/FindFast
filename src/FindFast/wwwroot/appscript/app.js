@@ -1,4 +1,4 @@
-System.register(['angular2/core', "./realEstateAdList.component", "./realEstateAdInsert.component", 'angular2/router'], function(exports_1) {
+System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", 'angular2/router'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,41 +8,64 @@ System.register(['angular2/core', "./realEstateAdList.component", "./realEstateA
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, realEstateAdList_component_1, realEstateAdInsert_component_1, router_1;
-    var AppComponent;
+    var core_1, realEstateAdService_1, realEstateAdList_component_1, router_1;
+    var AppComponent, ComponentHelper;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (realEstateAdService_1_1) {
+                realEstateAdService_1 = realEstateAdService_1_1;
+            },
             function (realEstateAdList_component_1_1) {
                 realEstateAdList_component_1 = realEstateAdList_component_1_1;
-            },
-            function (realEstateAdInsert_component_1_1) {
-                realEstateAdInsert_component_1 = realEstateAdInsert_component_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_realEstateAdService) {
+                    var _this = this;
+                    this._realEstateAdService = _realEstateAdService;
+                    this._realEstateAdService.countAdd$.subscribe(function (res) {
+                        _this.realEstateAdCount = res;
+                    });
                 }
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n   \n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n       \n        <router-outlet></router-outlet>\n\n    ",
-                        directives: [realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdInsert_component_1.RealEstateAdInsertComponent, router_1.ROUTER_DIRECTIVES]
+                        providers: [
+                            core_1.provide(realEstateAdService_1.RealEstateAdService, { useClass: realEstateAdService_1.RealEstateAdService })
+                        ],
+                        template: "\n   \n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
+                        directives: [realEstateAdList_component_1.RealEstateAdListComponent, router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
                         { path: '/list', name: 'RealEstateAdList', component: realEstateAdList_component_1.RealEstateAdListComponent, useAsDefault: true },
-                        { path: '/add', name: 'RealEstateAdAdd', component: realEstateAdInsert_component_1.RealEstateAdInsertComponent }
+                        new router_1.AsyncRoute({
+                            path: '/add',
+                            loader: function () { return ComponentHelper.LoadComponentAsync('RealEstateAdInsertComponent', 'appscript/realEstateAdInsert.component'); },
+                            name: 'RealEstateAdAdd'
+                        })
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [realEstateAdService_1.RealEstateAdService])
                 ], AppComponent);
                 return AppComponent;
             })();
             exports_1("AppComponent", AppComponent);
+            ComponentHelper = (function () {
+                function ComponentHelper() {
+                }
+                ComponentHelper.LoadComponentAsync = function (name, path) {
+                    return System.import(path).then(function (c) {
+                        var t = c[name];
+                        return t;
+                    });
+                };
+                return ComponentHelper;
+            })();
         }
     }
 });

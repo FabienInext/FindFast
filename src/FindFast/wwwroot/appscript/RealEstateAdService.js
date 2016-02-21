@@ -1,4 +1,4 @@
-System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx', 'rxjs/Observable'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, realEstateAd_1, http_1;
+    var core_1, realEstateAd_1, http_1, Observable_1;
     var RealEstateAdService;
     return {
         setters:[
@@ -21,15 +21,20 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
             function (http_1_1) {
                 http_1 = http_1_1;
             },
-            function (_1) {}],
+            function (_1) {},
+            function (Observable_1_1) {
+                Observable_1 = Observable_1_1;
+            }],
         execute: function() {
             RealEstateAdService = (function () {
                 function RealEstateAdService(http) {
+                    var _this = this;
                     this.http = http;
                     /*this.realEstateList  = [
                         { "title": "Title1", "description": "description1", "price": 10000, "surface": 38 },
                         { "title": "Title2", "description": "description2", "price": 20000, "surface": 45 }
                     ];*/
+                    this.countAdd$ = new Observable_1.Observable(function (observer) { return _this._countAddObserver = observer; }).share();
                 }
                 RealEstateAdService.prototype.insertRealEstateAd = function (realEstateAd) {
                     var _this = this;
@@ -37,8 +42,13 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     this.http.post('api/realestatead/insert', body, options).map(function (res) { return res.json(); })
-                        .subscribe(function (data) { return _this.saveJwt(data.id_token); }, function (err) { return _this.logError(err); }, function () { return console.log('Authentication Complete'); });
-                    ;
+                        .subscribe(function (data) { return _this.saveJwt(data.id_token); }, function (err) { return _this.logError(err); }, function () {
+                        console.log('Authentication Complete');
+                        _this._currentCountAd++;
+                        if (_this._countAddObserver) {
+                            _this._countAddObserver.next(_this._currentCountAd);
+                        }
+                    });
                 };
                 RealEstateAdService.prototype.saveJwt = function (jwt) {
                     if (jwt) {
@@ -48,12 +58,24 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx'],
                 RealEstateAdService.prototype.logError = function (error) {
                 };
                 RealEstateAdService.prototype.getRealEstateList = function () {
-                    return this.getGenericRealEstateList('api/realestatead/GetAll');
+                    var _this = this;
+                    var realEstateList = this.getGenericRealEstateList('api/realestatead/GetAll');
+                    realEstateList.subscribe(function (res) {
+                        _this._currentCountAd = res.length;
+                        _this._countAddObserver.next(_this._currentCountAd);
+                    });
+                    return realEstateList;
                 };
                 RealEstateAdService.prototype.getRealEstateListBy = function (term) {
+                    var _this = this;
                     if (term.length > 0) {
                         console.log('getRealEstateListBy');
-                        return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+                        var realEstateList = this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+                        realEstateList.subscribe(function (res) {
+                            _this._currentCountAd = res.length;
+                            _this._countAddObserver.next(_this._currentCountAd);
+                        });
+                        return realEstateList;
                     }
                     else {
                         return this.getRealEstateList();

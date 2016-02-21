@@ -2,9 +2,13 @@
 import {RealEstateAd}     from './realEstateAd';
 import {HTTP_PROVIDERS, Http, Headers, RequestOptions} from 'angular2/http';
 import 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class RealEstateAdService {
+    public countAdd$: Observable<number>;
+    private _countAddObserver: any;
+    private _currentCountAd : number;
     realEstateList: RealEstateAd[];
 
     constructor(private http: Http) {
@@ -12,6 +16,7 @@ export class RealEstateAdService {
             { "title": "Title1", "description": "description1", "price": 10000, "surface": 38 },
             { "title": "Title2", "description": "description2", "price": 20000, "surface": 45 }
         ];*/
+        this.countAdd$ = new Observable(observer => this._countAddObserver = observer).share();
     }
 
     insertRealEstateAd(realEstateAd: RealEstateAd) {
@@ -22,8 +27,16 @@ export class RealEstateAdService {
             .subscribe(
             data => this.saveJwt(data.id_token),
             err => this.logError(err),
-            () => console.log('Authentication Complete')
-            );;
+            () => {               
+                console.log('Authentication Complete');
+                this._currentCountAd++;
+                if (this._countAddObserver) {
+                    this._countAddObserver.next(this._currentCountAd);
+                }
+            }
+        );
+
+        
     }
     saveJwt(jwt) {
         if (jwt) {
@@ -35,13 +48,30 @@ export class RealEstateAdService {
     }
 
     getRealEstateList() {
-        return this.getGenericRealEstateList('api/realestatead/GetAll');      
+        let realEstateList = this.getGenericRealEstateList('api/realestatead/GetAll');
+       
+        realEstateList.subscribe((res: Array<RealEstateAd>) =>
+        {
+            this._currentCountAd = res.length;
+            this._countAddObserver.next(this._currentCountAd);
+        }
+        );
+
+        return realEstateList;      
     }
 
     getRealEstateListBy(term: string) {
         if (term.length > 0) {
             console.log('getRealEstateListBy');
-            return this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+            let realEstateList = this.getGenericRealEstateList('api/realestatead/GetBy/' + term);
+
+            realEstateList.subscribe((res: Array<RealEstateAd>) => {
+                this._currentCountAd = res.length;
+                this._countAddObserver.next(this._currentCountAd);
+            }
+            );
+
+            return realEstateList;
         }
         else {
             return this.getRealEstateList();

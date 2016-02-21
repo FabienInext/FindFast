@@ -1,10 +1,11 @@
 ﻿<div>
     <input type="text" [ngFormControl]="term" />
 
-    <div infinite-scroll
-         [infiniteScrollDistance]="1000"
-         (scrolled)="onScroll()" >
+    <div  >
         Real estate list
+        <p>
+            Number of Ads : {{realEstateAdCount}} <a (click) ="addRealEstateAd()">Add fake</a>
+        </p>
         <table>
             <thead>
                 <tr>

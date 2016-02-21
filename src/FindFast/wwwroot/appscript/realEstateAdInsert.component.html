@@ -1,4 +1,6 @@
-﻿<div>
+﻿<div infinite-scroll
+         [infiniteScrollDistance]="1000"
+         (scrolled)="onScroll()">
     <form [ngFormModel]="formGroup" (submit)="submitRealEstateAd()">
             <p>Title: <input ngControl="title"><span *ngIf="!title.valid"> [required]</span></p>
             <p>Description: <input ngControl="description"><span *ngIf="!description.valid"> [required]</span></p>

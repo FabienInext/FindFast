@@ -1,40 +1,61 @@
-﻿import {Component, OnInit} from 'angular2/core';
+﻿
+import {Component, provide, ElementRef, Injector,
+IterableDiffers, KeyValueDiffers, Renderer, OnInit, Output, EventEmitter, forwardRef} from 'angular2/core';
+/*import {Modal, ICustomModal, ModalConfig, ModalDialogInstance} from 'angular2-modal';*/
 import {Control} from 'angular2/common';
+import {AdditionCalculateWindowData, AdditionCalculateWindow} from './realEstateAdModal';
 import {RealEstateAdService} from './realEstateAdService';
 import {RealEstateAd} from "./realEstateAd"
 import {BaseRequestOptions, Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
+
 
 
 @Component({
     selector: 'realEstateAdList',
-    templateUrl: 'appscript/realEstateAdList.component.html',
-    providers: [RealEstateAdService],
-    directives: [InfiniteScroll]
+    templateUrl: 'appscript/realEstateAdList.component.html'
+    
 })
 export class RealEstateAdListComponent implements OnInit {
+    @Output() realEstateListFound = new EventEmitter();
+    private realEstateAdCount: number;
+
     public realEstateAdList: Observable<Array<RealEstateAd>>;
     term = new Control();
 
     constructor(private _realEstateAdService: RealEstateAdService) { 
-        console.log('test!!')
+
+        this._realEstateAdService.countAdd$.subscribe((res: number) => {
+            this.realEstateAdCount = res;
+        });
     }
 
-    onScroll() {
-        console.log('scrolled!!')
+    addRealEstateAd() {
+        let realEstateAd: RealEstateAd = new RealEstateAd("New Test4", "New description", 222, 333);
+
+        this._realEstateAdService.insertRealEstateAd(realEstateAd);
     }
 
-    getRealEstateAdList() {    
-     
+ 
+
+    getRealEstateAdList() {
+
         this.realEstateAdList = Observable.concat(
-              this._realEstateAdService.getRealEstateList(),
-              this.term.valueChanges
+            this._realEstateAdService.getRealEstateList(),
+            this.term.valueChanges
                 .debounceTime(400)
                 .distinctUntilChanged()
                 .switchMap(term => this._realEstateAdService.getRealEstateListBy(this.term.value))
-            
+
         );
+
+        /*    .subscribe(term => this._realEstateAdService.getRealEstateListBy(this.term.value)
+                .subscribe((res: Array<RealEstateAd>) => this.loadRealEstateAdList(res))); 
+    }*/
+
+        this.realEstateAdList.subscribe((res: Array<RealEstateAd>) => {
+            this.realEstateListFound.emit({ count: res.length });
+        });
     }
 
     ngOnInit() {

@@ -6,11 +6,13 @@ import {BaseRequestOptions, Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {ValidationService} from "./validationService"
 import {Router} from 'angular2/router';
+import { InfiniteScroll } from 'angular2-infinite-scroll';
 
 @Component({
     selector: 'realEstateAdInsert',
     templateUrl: 'appscript/realEstateAdInsert.component.html',
-    providers: [RealEstateAdService]
+    providers: [RealEstateAdService]    ,   
+    directives: [InfiniteScroll]
 })
 export class RealEstateAdInsertComponent implements OnInit {
     title: Control;
@@ -37,7 +39,11 @@ export class RealEstateAdInsertComponent implements OnInit {
         let realEstateAd: RealEstateAd = new RealEstateAd(this.title.value, this.description.value, this.price.value, this.surface.value);
 
         this._realEstateAdService.insertRealEstateAd(realEstateAd);
-        this._router.navigate(['RealEstateAdList']);
+        this._router.navigate(['RealEstateAdList', {}]);
+    }
+
+    onScroll() {
+        console.log('scrolled!!')
     }
 
     ngOnInit() {

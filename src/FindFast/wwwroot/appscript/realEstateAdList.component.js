@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './realEstateAdService', "./realEstateAd", 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './realEstateAdService', "./realEstateAd", 'rxjs/Rx', './realEstateAdInsert.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, realEstateAdService_1, realEstateAd_1, Rx_1;
+    var core_1, common_1, realEstateAdService_1, realEstateAd_1, Rx_1, realEstateAdInsert_component_1;
     var RealEstateAdListComponent;
     return {
         setters:[
@@ -26,6 +26,9 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
             },
             function (Rx_1_1) {
                 Rx_1 = Rx_1_1;
+            },
+            function (realEstateAdInsert_component_1_1) {
+                realEstateAdInsert_component_1 = realEstateAdInsert_component_1_1;
             }],
         execute: function() {
             RealEstateAdListComponent = (function () {
@@ -34,6 +37,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
                     this._realEstateAdService = _realEstateAdService;
                     this.realEstateListFound = new core_1.EventEmitter();
                     this.term = new common_1.Control();
+                    this.termstore = new common_1.Control();
                     this._realEstateAdService.countAdd$.subscribe(function (res) {
                         _this.realEstateAdCount = res;
                     });
@@ -65,7 +69,8 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
                 RealEstateAdListComponent = __decorate([
                     core_1.Component({
                         selector: 'realEstateAdList',
-                        templateUrl: 'appscript/realEstateAdList.component.html'
+                        templateUrl: 'appscript/realEstateAdList.component.html',
+                        directives: [realEstateAdInsert_component_1.RealEstateAdInsertComponent]
                     }), 
                     __metadata('design:paramtypes', [realEstateAdService_1.RealEstateAdService])
                 ], RealEstateAdListComponent);

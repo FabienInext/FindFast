@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './realEstateAdService', "./realEstateAd", "./validationService", 'angular2/router', 'angular2-infinite-scroll'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './realEstateAdService', "./realEstateAd", "./validationService", 'angular2/router', 'angular2-infinite-scroll', './RealEstateAdStore'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, realEstateAdService_1, realEstateAd_1, validationService_1, router_1, angular2_infinite_scroll_1;
+    var core_1, common_1, realEstateAdService_1, realEstateAd_1, validationService_1, router_1, angular2_infinite_scroll_1, RealEstateAdStore_1;
     var RealEstateAdInsertComponent;
     return {
         setters:[
@@ -32,13 +32,17 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
             },
             function (angular2_infinite_scroll_1_1) {
                 angular2_infinite_scroll_1 = angular2_infinite_scroll_1_1;
+            },
+            function (RealEstateAdStore_1_1) {
+                RealEstateAdStore_1 = RealEstateAdStore_1_1;
             }],
         execute: function() {
             RealEstateAdInsertComponent = (function () {
-                function RealEstateAdInsertComponent(_router, _builder, _realEstateAdService) {
+                function RealEstateAdInsertComponent(_router, _builder, _realEstateAdService, realEstateAddStore) {
                     this._router = _router;
                     this._builder = _builder;
                     this._realEstateAdService = _realEstateAdService;
+                    this.realEstateAddStore = realEstateAddStore;
                     this.title = new common_1.Control('', common_1.Validators.required);
                     this.description = new common_1.Control('', common_1.Validators.required);
                     this.price = new common_1.Control('', common_1.Validators.compose([common_1.Validators.required, validationService_1.ValidationService.numericValidator]));
@@ -51,8 +55,9 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
                     });
                 }
                 RealEstateAdInsertComponent.prototype.submitRealEstateAd = function () {
-                    var realEstateAd = new realEstateAd_1.RealEstateAd(this.title.value, this.description.value, this.price.value, this.surface.value);
-                    this._realEstateAdService.insertRealEstateAd(realEstateAd);
+                    var realEstateAd = new realEstateAd_1.RealEstateAd(null, this.title.value, this.description.value, this.price.value, this.surface.value);
+                    //this._realEstateAdService.insertRealEstateAd(realEstateAd);
+                    this.realEstateAddStore.addRealEstateAd(realEstateAd);
                     this._router.navigate(['RealEstateAdList', {}]);
                 };
                 RealEstateAdInsertComponent.prototype.onScroll = function () {
@@ -67,7 +72,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
                         providers: [realEstateAdService_1.RealEstateAdService],
                         directives: [angular2_infinite_scroll_1.InfiniteScroll]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, common_1.FormBuilder, realEstateAdService_1.RealEstateAdService])
+                    __metadata('design:paramtypes', [router_1.Router, common_1.FormBuilder, realEstateAdService_1.RealEstateAdService, RealEstateAdStore_1.RealEstateAddStore])
                 ], RealEstateAdInsertComponent);
                 return RealEstateAdInsertComponent;
             })();

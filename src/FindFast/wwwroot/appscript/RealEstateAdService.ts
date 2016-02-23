@@ -89,7 +89,7 @@ export class RealEstateAdService {
 
                 if (results) {
                     results.forEach((result) => {
-                        realEstateAds.push(new RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
+                        realEstateAds.push(new RealEstateAd(result.Id,result.Title, result.Description, result.Price, result.Surface));
 
                     });
 

@@ -23,11 +23,19 @@ namespace FindFast.Infrastructure
             _database = _client.GetDatabase("FindFast");
         }
 
+        public async Task DeleteByIdAsync(string id)
+        {
+            var collection = _database.GetCollection<BsonDocument>("realestate");
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(id));
+            var result = await collection.DeleteOneAsync(filter);
+        }
+
         public async Task InsertAsync(RealEstate realEstate)
         {
-           var collection = _database.GetCollection<BsonDocument>("realestate");
+           var collection = _database.GetCollection<RealEstate>("realestate");
             
-            await collection.InsertOneAsync(realEstate.ToBsonDocument());
+            await collection.InsertOneAsync(realEstate);
+           
         }
 
         public async Task<IEnumerable<RealEstate>> FindAllAsync(string title = null)

@@ -8,5 +8,6 @@ namespace FindFast.Infrastructure
     {
         Task<IEnumerable<RealEstate>> FindAllAsync(string title = null);
         Task InsertAsync(RealEstate realEstate);
+        Task DeleteByIdAsync(string id);
     }
 }

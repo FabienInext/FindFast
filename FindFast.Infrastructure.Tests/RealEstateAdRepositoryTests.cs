@@ -12,6 +12,14 @@ namespace FindFast.Infrastructure.Tests
     public class RealEstateAdRepositoryTests
     {
         [Fact]
+        public async void DeleteTest()
+        {
+            var repo = new RealEstateAdRepository();
+            await repo.DeleteByIdAsync("56c358000c26838894aac9a1");
+            Assert.Equal(4, Add(2, 2));
+        }
+
+        [Fact]
         public async void InsertTest()
         {
             var realEstate = new RealEstate

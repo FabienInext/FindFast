@@ -61,7 +61,8 @@ var libsToMove = [
    paths.npmSrc + '/es6-shim/es6-shim.min.js',
    paths.npmSrc + '/angular2/bundles/http.dev.js',
    paths.npmSrc + '/angular2/bundles/router.dev.js',
-   paths.npmSrc + '/angular2-infinite-scroll/bundles/angular2-infinite-scroll.js',
+   paths.npmSrc + '/immutable/dist/immutable.js',
+  // paths.npmSrc + '/angular2-infinite-scroll/bundles/angular2-infinite-scroll.js',
    paths.npmSrc + '/angular2-modal/dist/**/*.*'
 ];
 gulp.task('moveToLibs', function () {

@@ -4,7 +4,8 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             RealEstateAd = (function () {
-                function RealEstateAd(title, description, price, surface) {
+                function RealEstateAd(id, title, description, price, surface) {
+                    this.id = id;
                     this.title = title;
                     this.description = description;
                     this.price = price;
@@ -16,4 +17,4 @@ System.register([], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=RealEstateAd.js.map
+//# sourceMappingURL=realEstateAd.js.map

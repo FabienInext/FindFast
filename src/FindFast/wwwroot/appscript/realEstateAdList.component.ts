@@ -8,12 +8,13 @@ import {RealEstateAdService} from './realEstateAdService';
 import {RealEstateAd} from "./realEstateAd"
 import {BaseRequestOptions, Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-
+import {RealEstateAdInsertComponent} from './realEstateAdInsert.component';
 
 
 @Component({
     selector: 'realEstateAdList',
-    templateUrl: 'appscript/realEstateAdList.component.html'
+    templateUrl: 'appscript/realEstateAdList.component.html',
+    directives: [RealEstateAdInsertComponent]
     
 })
 export class RealEstateAdListComponent implements OnInit {
@@ -22,8 +23,10 @@ export class RealEstateAdListComponent implements OnInit {
 
     public realEstateAdList: Observable<Array<RealEstateAd>>;
     term = new Control();
+    termstore = new Control();
 
-    constructor(private _realEstateAdService: RealEstateAdService) { 
+    constructor(
+        private _realEstateAdService: RealEstateAdService) { 
 
         this._realEstateAdService.countAdd$.subscribe((res: number) => {
             this.realEstateAdCount = res;

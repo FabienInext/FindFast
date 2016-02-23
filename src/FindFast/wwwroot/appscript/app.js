@@ -1,4 +1,4 @@
-System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", 'angular2/router'], function(exports_1) {
+System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", "./realEstateAdStoreList.component", 'angular2/router', './RealEstateAdStore', "./RealEstateAddBackendService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, realEstateAdService_1, realEstateAdList_component_1, router_1;
+    var core_1, realEstateAdService_1, realEstateAdList_component_1, realEstateAdStoreList_component_1, router_1, RealEstateAdStore_1, RealEstateAddBackendService_1;
     var AppComponent, ComponentHelper;
     return {
         setters:[
@@ -21,8 +21,17 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
             function (realEstateAdList_component_1_1) {
                 realEstateAdList_component_1 = realEstateAdList_component_1_1;
             },
+            function (realEstateAdStoreList_component_1_1) {
+                realEstateAdStoreList_component_1 = realEstateAdStoreList_component_1_1;
+            },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (RealEstateAdStore_1_1) {
+                RealEstateAdStore_1 = RealEstateAdStore_1_1;
+            },
+            function (RealEstateAddBackendService_1_1) {
+                RealEstateAddBackendService_1 = RealEstateAddBackendService_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -37,10 +46,12 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                     core_1.Component({
                         selector: 'my-app',
                         providers: [
-                            core_1.provide(realEstateAdService_1.RealEstateAdService, { useClass: realEstateAdService_1.RealEstateAdService })
+                            core_1.provide(realEstateAdService_1.RealEstateAdService, { useClass: realEstateAdService_1.RealEstateAdService }),
+                            core_1.provide(RealEstateAdStore_1.RealEstateAddStore, { useClass: RealEstateAdStore_1.RealEstateAddStore }),
+                            core_1.provide(RealEstateAddBackendService_1.RealEstateAddBackendService, { useClass: RealEstateAddBackendService_1.RealEstateAddBackendService })
                         ],
-                        template: "\n   \n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
-                        directives: [realEstateAdList_component_1.RealEstateAdListComponent, router_1.ROUTER_DIRECTIVES]
+                        template: "TEST\n        <realEstateAdStoreList></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
+                        directives: [realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdStoreList_component_1.RealEstateAdStoreListComponent, router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
                         { path: '/list', name: 'RealEstateAdList', component: realEstateAdList_component_1.RealEstateAdListComponent, useAsDefault: true },

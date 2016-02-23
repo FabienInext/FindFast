@@ -13,8 +13,9 @@
         <script src="libs/rx.js"></script>
         <script src="libs/angular2.dev.js"></script>
         <script src="libs/http.dev.js"></script>
-        <script src="libs/angular2-infinite-scroll.js"></script>
-        <script src="libs/router.dev.js"></script>      
+        <!--<script src="libs/angular2-infinite-scroll.js"></script>-->
+        <script src="libs/router.dev.js"></script>   
+        <script src="libs/immutable.js"></script>      
        <!-- <script src="libs/angular2-modal/index.js"></script>
         <script src="libs/commonmodals/okonlymodal.js"></script>
         <script src="libs/commonmodals/yesnomodal.js"></script>
@@ -40,15 +41,15 @@
                 appscript: {
                     defaultExtension: 'js',
                     map: {
-                        'angular2-modal' : 'libs/angular2-modal'/*,
-                        'angular2-infinite-scroll' : 'libs'*/
+                        'angular2-modal' : 'libs/angular2-modal',
+                        'angular2-infinite-scroll' : 'libs/angular2-infinite-scroll'
                 }              
             },
             'libs/angular2-modal' :{
                 defaultExtension: 'js',
                 main: 'index.js'
             },
-             'libs' :{
+             'libs/angular2-infinite-scroll' :{
                 defaultExtension: 'js',
                 main : 'angular2-infinite-scroll.js'
             }

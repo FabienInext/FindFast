@@ -3,25 +3,31 @@ import {RealEstateAdService} from './realEstateAdService';
 import {RealEstateAd} from "./realEstateAd"
 import {BaseRequestOptions, Http, Response} from 'angular2/http';
 import {RealEstateAdListComponent} from "./realEstateAdList.component";
+import {RealEstateAdStoreListComponent} from "./realEstateAdStoreList.component";
 import {RealEstateAdInsertComponent} from "./realEstateAdInsert.component";
 import {RouteConfig, ROUTER_DIRECTIVES, AsyncRoute} from 'angular2/router';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
+import {RealEstateAddStore} from './RealEstateAdStore';
+import {RealEstateAddBackendService} from "./RealEstateAddBackendService";
 declare var System: any;
 
 
 @Component({
     selector: 'my-app',
     providers: [
-        provide(RealEstateAdService, { useClass: RealEstateAdService })
+        provide(RealEstateAdService, { useClass: RealEstateAdService }),
+        provide(RealEstateAddStore, { useClass: RealEstateAddStore }),
+        provide(RealEstateAddBackendService, { useClass: RealEstateAddBackendService })
     ],
-    template: `
-   
+    template: `TEST
+        <realEstateAdStoreList></realEstateAdStoreList>
+        XXX
+        <a [routerLink]="['RealEstateAdList']">Back</a>
         <a [routerLink]="['RealEstateAdAdd']">Add</a>
         <p>Number of Add  : {{realEstateAdCount}}</p>
         <router-outlet></router-outlet>
 
     `,
-    directives: [RealEstateAdListComponent, ROUTER_DIRECTIVES]
+    directives: [RealEstateAdListComponent, RealEstateAdStoreListComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
         { path: '/list', name: 'RealEstateAdList', component: RealEstateAdListComponent, useAsDefault: true },

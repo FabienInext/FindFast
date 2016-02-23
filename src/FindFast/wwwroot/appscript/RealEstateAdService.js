@@ -91,7 +91,7 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx', 
                         var realEstateAds = [];
                         if (results) {
                             results.forEach(function (result) {
-                                realEstateAds.push(new realEstateAd_1.RealEstateAd(result.Title, result.Description, result.Price, result.Surface));
+                                realEstateAds.push(new realEstateAd_1.RealEstateAd(result.Id, result.Title, result.Description, result.Price, result.Surface));
                             });
                         }
                         return realEstateAds;

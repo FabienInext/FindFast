@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Rx';
 import {ValidationService} from "./validationService"
 import {Router} from 'angular2/router';
 import { InfiniteScroll } from 'angular2-infinite-scroll';
+import {RealEstateAddStore} from './RealEstateAdStore';
 
 @Component({
     selector: 'realEstateAdInsert',
@@ -21,7 +22,8 @@ export class RealEstateAdInsertComponent implements OnInit {
     surface: Control;
     formGroup: ControlGroup;  
 
-    constructor(private _router: Router, private _builder: FormBuilder, private _realEstateAdService: RealEstateAdService) { 
+    constructor(private _router: Router, private _builder: FormBuilder,
+        private _realEstateAdService: RealEstateAdService, private realEstateAddStore: RealEstateAddStore) { 
         this.title = new Control('', Validators.required);
         this.description = new Control('', Validators.required);
         this.price = new Control('', Validators.compose([Validators.required, ValidationService.numericValidator]));
@@ -36,9 +38,10 @@ export class RealEstateAdInsertComponent implements OnInit {
     }
 
     submitRealEstateAd() {
-        let realEstateAd: RealEstateAd = new RealEstateAd(this.title.value, this.description.value, this.price.value, this.surface.value);
+        let realEstateAd: RealEstateAd = new RealEstateAd(null,this.title.value, this.description.value, this.price.value, this.surface.value);
 
-        this._realEstateAdService.insertRealEstateAd(realEstateAd);
+        //this._realEstateAdService.insertRealEstateAd(realEstateAd);
+        this.realEstateAddStore.addRealEstateAd(realEstateAd);
         this._router.navigate(['RealEstateAdList', {}]);
     }
 

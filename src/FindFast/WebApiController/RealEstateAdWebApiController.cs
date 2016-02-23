@@ -13,6 +13,18 @@ namespace FindFast.WebApiController
     [Route("api/realestatead")]
     public class RealEstateAdWebApiController : Controller
     {
+        public class RealEstateDto
+        {   
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public decimal Price { get; set; }
+            public int Surface { get; set; }
+
+            public RealEstateDto()
+            {
+            }
+        }
+
         private IRealEstateAdRepository _realEstateAdRepository;
 
         public RealEstateAdWebApiController(IRealEstateAdRepository realEstateRepository)
@@ -25,13 +37,28 @@ namespace FindFast.WebApiController
         {
             return await _realEstateAdRepository.FindAllAsync();
         }
-            
-        [HttpPost("Insert")]
-        public async Task<ActionResult> Post([FromBody]RealEstate value)
-        {
-            await _realEstateAdRepository.InsertAsync(value);
 
-            return Json(new { Foo = "bar" });
+        [HttpDelete("Delete")]
+        public async Task<ActionResult> DeleteBy(string id)
+        {
+            await _realEstateAdRepository.DeleteByIdAsync(id);
+
+            return Json(new { Status = "OK" });
+        }
+
+        [HttpPost("Insert")]
+        public async Task<ActionResult> Post([FromBody]RealEstateDto value)
+        {
+            var realEstateAd = new RealEstate
+            {
+                 Title = value.Title,
+                 Description = value.Description,
+                 Surface = value.Surface,
+                 Price = value.Price
+            };
+            await _realEstateAdRepository.InsertAsync(realEstateAd);
+
+            return Json(realEstateAd);
         }
 
         [HttpGet("GetBy/{term}")]
@@ -54,11 +81,7 @@ namespace FindFast.WebApiController
             return "value";
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+      
 
         // PUT api/values/5
         [HttpPut("{id}")]

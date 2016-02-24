@@ -8,6 +8,8 @@ import {RealEstateAdInsertComponent} from "./realEstateAdInsert.component";
 import {RouteConfig, ROUTER_DIRECTIVES, AsyncRoute} from 'angular2/router';
 import {RealEstateAddStore} from './RealEstateAdStore';
 import {RealEstateAddBackendService} from "./RealEstateAddBackendService";
+import {UiStateStore} from "./uiStateStore";
+import {UiState} from "./uiState";
 declare var System: any;
 
 
@@ -18,7 +20,7 @@ declare var System: any;
         provide(RealEstateAddStore, { useClass: RealEstateAddStore }),
         provide(RealEstateAddBackendService, { useClass: RealEstateAddBackendService })
     ],
-    template: `TEST
+    template: `Message : {{uiStateMessage | async}}
         <realEstateAdStoreList></realEstateAdStoreList>
         XXX
         <a [routerLink]="['RealEstateAdList']">Back</a>
@@ -50,11 +52,16 @@ declare var System: any;
 export class AppComponent {
     private realEstateAdCount: number;
 
-    constructor(private _realEstateAdService: RealEstateAdService) {
+    constructor(private _realEstateAdService: RealEstateAdService,
+        private uiStateStore: UiStateStore) {
         this._realEstateAdService.countAdd$.subscribe((res: number) => {
             this.realEstateAdCount = res;
         });
-}
+    }
+
+    get uiStateMessage() {
+        return this.uiStateStore.uiState.map((uiState: UiState) => uiState.message);
+    }
 }
 
 class ComponentHelper {

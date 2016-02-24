@@ -1,4 +1,4 @@
-System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", "./realEstateAdStoreList.component", 'angular2/router', './RealEstateAdStore', "./RealEstateAddBackendService"], function(exports_1) {
+System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", "./realEstateAdStoreList.component", 'angular2/router', './RealEstateAdStore', "./RealEstateAddBackendService", "./uiStateStore"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, realEstateAdService_1, realEstateAdList_component_1, realEstateAdStoreList_component_1, router_1, RealEstateAdStore_1, RealEstateAddBackendService_1;
+    var core_1, realEstateAdService_1, realEstateAdList_component_1, realEstateAdStoreList_component_1, router_1, RealEstateAdStore_1, RealEstateAddBackendService_1, uiStateStore_1;
     var AppComponent, ComponentHelper;
     return {
         setters:[
@@ -32,16 +32,27 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
             },
             function (RealEstateAddBackendService_1_1) {
                 RealEstateAddBackendService_1 = RealEstateAddBackendService_1_1;
+            },
+            function (uiStateStore_1_1) {
+                uiStateStore_1 = uiStateStore_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_realEstateAdService) {
+                function AppComponent(_realEstateAdService, uiStateStore) {
                     var _this = this;
                     this._realEstateAdService = _realEstateAdService;
+                    this.uiStateStore = uiStateStore;
                     this._realEstateAdService.countAdd$.subscribe(function (res) {
                         _this.realEstateAdCount = res;
                     });
                 }
+                Object.defineProperty(AppComponent.prototype, "uiStateMessage", {
+                    get: function () {
+                        return this.uiStateStore.uiState.map(function (uiState) { return uiState.message; });
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
@@ -50,7 +61,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             core_1.provide(RealEstateAdStore_1.RealEstateAddStore, { useClass: RealEstateAdStore_1.RealEstateAddStore }),
                             core_1.provide(RealEstateAddBackendService_1.RealEstateAddBackendService, { useClass: RealEstateAddBackendService_1.RealEstateAddBackendService })
                         ],
-                        template: "TEST\n        <realEstateAdStoreList></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
+                        template: "Message : {{uiStateMessage | async}}\n        <realEstateAdStoreList></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
                         directives: [realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdStoreList_component_1.RealEstateAdStoreListComponent, router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
@@ -61,7 +72,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             name: 'RealEstateAdAdd'
                         })
                     ]), 
-                    __metadata('design:paramtypes', [realEstateAdService_1.RealEstateAdService])
+                    __metadata('design:paramtypes', [realEstateAdService_1.RealEstateAdService, uiStateStore_1.UiStateStore])
                 ], AppComponent);
                 return AppComponent;
             })();

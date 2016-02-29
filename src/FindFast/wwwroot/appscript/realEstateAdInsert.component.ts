@@ -6,7 +6,7 @@ import {BaseRequestOptions, Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {ValidationService} from "./validationService"
 import {Router} from 'angular2/router';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
+//import { InfiniteScroll } from 'angular2-infinite-scroll';
 import {RealEstateAddStore} from './RealEstateAdStore';
 import {UiStateStore} from "./uiStateStore";
 import {UiState} from "./uiState";
@@ -14,8 +14,8 @@ import {UiState} from "./uiState";
 @Component({
     selector: 'realEstateAdInsert',
     templateUrl: 'appscript/realEstateAdInsert.component.html',
-    providers: [RealEstateAdService]    ,   
-    directives: [InfiniteScroll]
+    providers: [RealEstateAdService]    /*,   
+    directives: [InfiniteScroll]*/
 })
 export class RealEstateAdInsertComponent implements OnInit {
     title: Control;
@@ -39,6 +39,10 @@ export class RealEstateAdInsertComponent implements OnInit {
         
     }
 
+    raiseError() {
+        this._uiStateStore.raiseError("This is a new error");
+    }
+
     submitRealEstateAd() {
         let realEstateAd: RealEstateAd = new RealEstateAd(null, this.title.value, this.description.value, this.price.value, this.surface.value);
         this._uiStateStore.startBackendAction('Creating  Ad...');
@@ -47,7 +51,7 @@ export class RealEstateAdInsertComponent implements OnInit {
             .subscribe(
                 res => { },
                 err => { this._uiStateStore.endBackendAction() },
-                () => { this._uiStateStore.displayMessage("Ad has been added") }
+                () => { this._uiStateStore.displayMessage("Ad has been added"); this._uiStateStore.raiseError("This is a new error"); }
             );
         this._router.navigate(['RealEstateAdList', {}]);
     }

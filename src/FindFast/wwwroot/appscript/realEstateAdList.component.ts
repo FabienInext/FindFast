@@ -34,7 +34,7 @@ export class RealEstateAdListComponent implements OnInit {
     }
 
     addRealEstateAd() {
-        let realEstateAd: RealEstateAd = new RealEstateAd("New Test4", "New description", 222, 333);
+        let realEstateAd: RealEstateAd = new RealEstateAd("","New Test4", "New description", 222, 333);
 
         this._realEstateAdService.insertRealEstateAd(realEstateAd);
     }

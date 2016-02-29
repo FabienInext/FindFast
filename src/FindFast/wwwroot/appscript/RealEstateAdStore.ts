@@ -13,7 +13,7 @@ export class RealEstateAddStore {
         this.loadInitialData();
     }
 
-    get realEstateAdds() {
+    get realEstateAdds() {      
         return new Observable(fn => this._realEstateAdds.subscribe(fn));
     }
 
@@ -30,6 +30,8 @@ export class RealEstateAddStore {
             );
 
     }
+
+
 
     loadDataByTerm(term: string) {
         if (term.length > 0) {

@@ -1,4 +1,6 @@
-System.register(['angular2/core', '../models/ICustomModal', '../models/ModalDialogInstance'], function(exports_1) {
+System.register(['angular2/core', '../models/ICustomModal', '../models/ModalDialogInstance'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -35,7 +37,7 @@ System.register(['angular2/core', '../models/ICustomModal', '../models/ModalDial
                     this.okText = okText;
                 }
                 return OKOnlyContent;
-            })();
+            }());
             exports_1("OKOnlyContent", OKOnlyContent);
             /**
              * A 2 state bootstrap modal window, representing 2 possible answer, true/false.
@@ -56,7 +58,7 @@ System.register(['angular2/core', '../models/ICustomModal', '../models/ModalDial
                     __metadata('design:paramtypes', [ModalDialogInstance_1.ModalDialogInstance, ICustomModal_1.ICustomModal])
                 ], OKOnlyModal);
                 return OKOnlyModal;
-            })();
+            }());
             exports_1("OKOnlyModal", OKOnlyModal);
         }
     }

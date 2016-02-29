@@ -1,4 +1,6 @@
-System.register(["angular2/core", "./uiState", "rxjs/Rx", "rxjs/Observable"], function(exports_1) {
+System.register(["angular2/core", "./uiState", "./uiErrorState", "rxjs/Rx", "rxjs/Observable"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +10,7 @@ System.register(["angular2/core", "./uiState", "rxjs/Rx", "rxjs/Observable"], fu
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, uiState_1, Rx_1, Observable_1;
+    var core_1, uiState_1, uiErrorState_1, Rx_1, Observable_1;
     var UiStateStore;
     return {
         setters:[
@@ -17,6 +19,9 @@ System.register(["angular2/core", "./uiState", "rxjs/Rx", "rxjs/Observable"], fu
             },
             function (uiState_1_1) {
                 uiState_1 = uiState_1_1;
+            },
+            function (uiErrorState_1_1) {
+                uiErrorState_1 = uiErrorState_1_1;
             },
             function (Rx_1_1) {
                 Rx_1 = Rx_1_1;
@@ -28,6 +33,7 @@ System.register(["angular2/core", "./uiState", "rxjs/Rx", "rxjs/Observable"], fu
             UiStateStore = (function () {
                 function UiStateStore() {
                     this._uiState = new Rx_1.BehaviorSubject(uiState_1.initialUiState);
+                    this._uiErrorState = new Rx_1.BehaviorSubject(uiErrorState_1.initialUiErrorState);
                 }
                 Object.defineProperty(UiStateStore.prototype, "uiState", {
                     get: function () {
@@ -37,10 +43,24 @@ System.register(["angular2/core", "./uiState", "rxjs/Rx", "rxjs/Observable"], fu
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(UiStateStore.prototype, "uiErrorState", {
+                    get: function () {
+                        var _this = this;
+                        return new Observable_1.Observable(function (fn) { return _this._uiErrorState.subscribe(fn); });
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 UiStateStore.prototype.startBackendAction = function (message) {
                     this._uiState.next({
                         actionOngoing: true,
                         message: message
+                    });
+                };
+                UiStateStore.prototype.raiseError = function (errorMessage) {
+                    var currentErrorState = this._uiErrorState;
+                    this._uiErrorState.next({
+                        errorMessage: errorMessage
                     });
                 };
                 UiStateStore.prototype.displayMessage = function (message) {
@@ -61,7 +81,7 @@ System.register(["angular2/core", "./uiState", "rxjs/Rx", "rxjs/Observable"], fu
                     __metadata('design:paramtypes', [])
                 ], UiStateStore);
                 return UiStateStore;
-            })();
+            }());
             exports_1("UiStateStore", UiStateStore);
         }
     }

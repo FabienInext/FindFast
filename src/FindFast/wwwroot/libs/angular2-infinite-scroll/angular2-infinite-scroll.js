@@ -1,4 +1,6 @@
-System.register(['./src/infinite-scroll', './src/scroller'], function(exports_1) {
+System.register(['./src/infinite-scroll', './src/scroller'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var infinite_scroll_1, scroller_1;
     function exportStar_1(m) {
         var exports = {};

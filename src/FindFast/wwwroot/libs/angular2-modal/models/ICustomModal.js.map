@@ -1,1 +1,1 @@
-{"version":3,"file":"ICustomModal.js","sourceRoot":"","sources":["ICustomModal.ts"],"names":["ICustomModal","ICustomModal.constructor"],"mappings":";;;;;YAEA;;eAEG;YACH;gBAAAA;gBAA2BC,CAACA;gBAADD,mBAACA;YAADA,CAACA,AAA5B,IAA4B;YAA5B,uCAA4B,CAAA"}
+{"version":3,"file":"ICustomModal.js","sourceRoot":"","sources":["ICustomModal.ts"],"names":[],"mappings":";;;;;;;YAEA;;eAEG;YACH;gBAAA;gBAA2B,CAAC;gBAAD,mBAAC;YAAD,CAAC,AAA5B,IAA4B;YAA5B,uCAA4B,CAAA"}

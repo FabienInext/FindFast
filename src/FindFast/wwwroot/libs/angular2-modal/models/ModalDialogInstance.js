@@ -1,4 +1,6 @@
-System.register(['angular2/src/facade/async'], function(exports_1) {
+System.register(['angular2/src/facade/async'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var async_1;
     var ModalDialogInstance;
     return {
@@ -71,7 +73,7 @@ System.register(['angular2/src/facade/async'], function(exports_1) {
                     this.contentRef.dispose();
                 };
                 return ModalDialogInstance;
-            })();
+            }());
             exports_1("ModalDialogInstance", ModalDialogInstance);
         }
     }

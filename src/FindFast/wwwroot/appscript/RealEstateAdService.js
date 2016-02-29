@@ -1,4 +1,6 @@
-System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx', 'rxjs/Observable'], function(exports_1) {
+System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx', 'rxjs/Observable'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -102,7 +104,7 @@ System.register(['angular2/core', './realEstateAd', 'angular2/http', 'rxjs/Rx', 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], RealEstateAdService);
                 return RealEstateAdService;
-            })();
+            }());
             exports_1("RealEstateAdService", RealEstateAdService);
         }
     }
@@ -129,4 +131,4 @@ return this.http.get('/api/v1/tasks.json')
 });
 }
 }*/
-//# sourceMappingURL=realEstateAdService.js.map
+//# sourceMappingURL=RealEstateAdService.js.map

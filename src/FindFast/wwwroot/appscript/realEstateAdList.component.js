@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/common', './realEstateAdService', "./realEstateAd", 'rxjs/Rx', './realEstateAdInsert.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', './realEstateAdService', "./realEstateAd", 'rxjs/Rx', './realEstateAdInsert.component'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43,7 +45,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
                     });
                 }
                 RealEstateAdListComponent.prototype.addRealEstateAd = function () {
-                    var realEstateAd = new realEstateAd_1.RealEstateAd("New Test4", "New description", 222, 333);
+                    var realEstateAd = new realEstateAd_1.RealEstateAd("", "New Test4", "New description", 222, 333);
                     this._realEstateAdService.insertRealEstateAd(realEstateAd);
                 };
                 RealEstateAdListComponent.prototype.getRealEstateAdList = function () {
@@ -75,7 +77,7 @@ System.register(['angular2/core', 'angular2/common', './realEstateAdService', ".
                     __metadata('design:paramtypes', [realEstateAdService_1.RealEstateAdService])
                 ], RealEstateAdListComponent);
                 return RealEstateAdListComponent;
-            })();
+            }());
             exports_1("RealEstateAdListComponent", RealEstateAdListComponent);
         }
     }

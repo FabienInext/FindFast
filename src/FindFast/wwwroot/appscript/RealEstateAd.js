@@ -1,4 +1,6 @@
-System.register([], function(exports_1) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var RealEstateAd;
     return {
         setters:[],
@@ -12,9 +14,9 @@ System.register([], function(exports_1) {
                     this.surface = surface;
                 }
                 return RealEstateAd;
-            })();
+            }());
             exports_1("RealEstateAd", RealEstateAd);
         }
     }
 });
-//# sourceMappingURL=realEstateAd.js.map
+//# sourceMappingURL=RealEstateAd.js.map

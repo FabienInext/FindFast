@@ -1,4 +1,6 @@
-System.register(['angular2/core', '../models/ModalConfig', '../models/ModalDialogInstance', '../components/modalBackdrop', '../components/bootstrapModalContainer'], function(exports_1) {
+System.register(['angular2/core', '../models/ModalConfig', '../models/ModalDialogInstance', '../components/modalBackdrop', '../components/bootstrapModalContainer'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -105,7 +107,7 @@ System.register(['angular2/core', '../models/ModalConfig', '../models/ModalDialo
                     __metadata('design:paramtypes', [core_1.DynamicComponentLoader, core_1.ApplicationRef, ModalConfig_1.ModalConfig])
                 ], Modal);
                 return Modal;
-            })();
+            }());
             exports_1("Modal", Modal);
         }
     }

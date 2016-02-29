@@ -1,6 +1,7 @@
-﻿<div infinite-scroll
+﻿<!--<div infinite-scroll
          [infiniteScrollDistance]="1000"
-         (scrolled)="onScroll()">
+         (scrolled)="onScroll()">-->
+    <div>
     <form [ngFormModel]="formGroup" (submit)="submitRealEstateAd()">
             <p>Title: <input ngControl="title"><span *ngIf="!title.valid"> [required]</span></p>
             <p>Description: <input ngControl="description"><span *ngIf="!description.valid"> [required]</span></p>
@@ -8,4 +9,5 @@
             <p>Surface: <input ngControl="surface"><span *ngIf="!surface.valid"> [required]</span></p>
             <button type="submit">Create</button>
     </form>
+        <button (click)="raiseError()">Raise error</button>
 </div>

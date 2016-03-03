@@ -61,6 +61,9 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             _this.openDialogError(); });
                     });
                 }
+                AppComponent.prototype.ngAfterViewInit = function () {
+                    var list = this.inputComponent.realEstateAdList;
+                };
                 AppComponent.prototype.openDialogError = function () {
                     var modalConfig = new angular2_modal_1.ModalConfig("lg", false, 27);
                     var modalData = new angular2_modal_1.YesNoModalContent('Simple Large modal', 'New error message is coming', true);
@@ -106,6 +109,10 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                 AppComponent.modalData = {
                     'customWindow': new customModal_1.AdditionCalculateWindowData(2, 3)
                 };
+                __decorate([
+                    core_1.ViewChild(realEstateAdStoreList_component_1.RealEstateAdStoreListComponent), 
+                    __metadata('design:type', realEstateAdStoreList_component_1.RealEstateAdStoreListComponent)
+                ], AppComponent.prototype, "inputComponent", void 0);
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
@@ -115,7 +122,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             core_1.provide(RealEstateAddBackendService_1.RealEstateAddBackendService, { useClass: RealEstateAddBackendService_1.RealEstateAddBackendService }),
                             angular2_modal_1.Modal
                         ],
-                        template: "Message : {{uiStateMessage | async}}\n         <button  (click)=\"openDialog('customWindow')\">Custom Window</button>\n      \n        <realEstateAdStoreList></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
+                        template: "Message : {{uiStateMessage | async}}\n         <button  (click)=\"openDialog('customWindow')\">Custom Window</button>\n      \n        <realEstateAdStoreList>   <footer>\n    Yet another todo app!\n  </footer>\n<footer>\n    Yet another todo app2!\n  </footer></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
                         directives: [realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdStoreList_component_1.RealEstateAdStoreListComponent, router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([

@@ -1,5 +1,5 @@
 ﻿import {Component, OnInit, provide, ComponentRef,ElementRef, Injector,
-    IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
+    IterableDiffers, KeyValueDiffers, Renderer, ViewChild, ViewChildren} from 'angular2/core';
 
 import {RealEstateAdService} from './realEstateAdService';
 import {RealEstateAd} from "./realEstateAd"
@@ -29,7 +29,12 @@ declare var System: any;
     template: `Message : {{uiStateMessage | async}}
          <button  (click)="openDialog('customWindow')">Custom Window</button>
       
-        <realEstateAdStoreList></realEstateAdStoreList>
+        <realEstateAdStoreList>   <footer>
+    Yet another todo app!
+  </footer>
+<footer>
+    Yet another todo app2!
+  </footer></realEstateAdStoreList>
         XXX
         <a [routerLink]="['RealEstateAdList']">Back</a>
         <a [routerLink]="['RealEstateAdAdd']">Add</a>
@@ -58,6 +63,9 @@ declare var System: any;
   })
 ])*/
 export class AppComponent {
+    @ViewChild(RealEstateAdStoreListComponent)
+    inputComponent: RealEstateAdStoreListComponent
+
     private realEstateAdCount: number;
 
     constructor(private _realEstateAddStore: RealEstateAddStore,private _realEstateAdService: RealEstateAdService,
@@ -68,6 +76,10 @@ export class AppComponent {
             this.uiStateStore.uiErrorState.map((uiErrorState: UiErrorState) => uiErrorState.errorMessage)
                 .subscribe((error) => { if (error) this.openDialogError() });
         });
+    }
+
+    ngAfterViewInit() {
+        var list = this.inputComponent.realEstateAdList;
     }
 
     static modalConfigs = {       

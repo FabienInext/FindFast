@@ -1,4 +1,4 @@
-System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", "./realEstateAdStoreList.component", 'angular2/router', './RealEstateAdStore', "./RealEstateAddBackendService", "./uiStateStore", 'angular2-modal', './customModal'], function(exports_1, context_1) {
+System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.component", "./realEstateAdStoreList.component", 'angular2/router', './RealEstateAdStore', "./uiStateStore", 'angular2-modal', './customModal', './redux/realEstateAdReduxList.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, realEstateAdService_1, realEstateAdList_component_1, realEstateAdStoreList_component_1, router_1, RealEstateAdStore_1, RealEstateAddBackendService_1, uiStateStore_1, angular2_modal_1, customModal_1;
+    var core_1, realEstateAdService_1, realEstateAdList_component_1, realEstateAdStoreList_component_1, router_1, RealEstateAdStore_1, uiStateStore_1, angular2_modal_1, customModal_1, realEstateAdReduxList_component_1;
     var AppComponent, ComponentHelper;
     return {
         setters:[
@@ -32,9 +32,6 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
             function (RealEstateAdStore_1_1) {
                 RealEstateAdStore_1 = RealEstateAdStore_1_1;
             },
-            function (RealEstateAddBackendService_1_1) {
-                RealEstateAddBackendService_1 = RealEstateAddBackendService_1_1;
-            },
             function (uiStateStore_1_1) {
                 uiStateStore_1 = uiStateStore_1_1;
             },
@@ -43,6 +40,9 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
             },
             function (customModal_1_1) {
                 customModal_1 = customModal_1_1;
+            },
+            function (realEstateAdReduxList_component_1_1) {
+                realEstateAdReduxList_component_1 = realEstateAdReduxList_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -119,11 +119,10 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                         providers: [
                             core_1.provide(realEstateAdService_1.RealEstateAdService, { useClass: realEstateAdService_1.RealEstateAdService }),
                             core_1.provide(RealEstateAdStore_1.RealEstateAddStore, { useClass: RealEstateAdStore_1.RealEstateAddStore }),
-                            core_1.provide(RealEstateAddBackendService_1.RealEstateAddBackendService, { useClass: RealEstateAddBackendService_1.RealEstateAddBackendService }),
                             angular2_modal_1.Modal
                         ],
-                        template: "Message : {{uiStateMessage | async}}\n         <button  (click)=\"openDialog('customWindow')\">Custom Window</button>\n      \n        <realEstateAdStoreList>   <footer>\n    Yet another todo app!\n  </footer>\n<footer>\n    Yet another todo app2!\n  </footer></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
-                        directives: [realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdStoreList_component_1.RealEstateAdStoreListComponent, router_1.ROUTER_DIRECTIVES]
+                        template: "Message : {{uiStateMessage | async}}\n         <button  (click)=\"openDialog('customWindow')\">Custom Window</button>\n       redux : <br>\n<realEstateAdReduxList></realEstateAdReduxList>\n        <realEstateAdStoreList>   <footer>\n    Yet another todo app!\n  </footer>\n<footer>\n    Yet another todo app2!\n  </footer></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
+                        directives: [realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdStoreList_component_1.RealEstateAdStoreListComponent, realEstateAdReduxList_component_1.RealEstateAdReduxListComponent, router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
                         { path: '/list', name: 'RealEstateAdList', component: realEstateAdList_component_1.RealEstateAdListComponent, useAsDefault: true },

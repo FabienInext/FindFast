@@ -1,0 +1,35 @@
+﻿
+<div>
+    
+    <table> 
+        <tr>
+            <td>
+                <table>
+
+                    <thead>
+                        <tr>
+                            <td>Redux</td>
+                        </tr>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Surface</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     
+                        <tr *ngFor="#realEstateAd of datasource ">
+                            <td>{{realEstateAd.title}}</td>
+                            <td>{{realEstateAd.description}}</td>
+                            <td>{{realEstateAd.price}}</td>
+                            <td>{{realEstateAd.surface}}</td>
+                            <td><a (click)="deleteAd(realEstateAd)">delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            
+        </tr>
+    </table>
+</div>

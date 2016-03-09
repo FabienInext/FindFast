@@ -1,0 +1,9 @@
+﻿<div>
+    <form [ngFormModel]="formGroup" (submit)="submitRealEstateAd()">
+        <p>Title: <input ngControl="title"><span *ngIf="!title.valid"> [required]</span></p>
+        <p>Description: <input ngControl="description"><span *ngIf="!description.valid"> [required]</span></p>
+        <p>Price: <input ngControl="price"><span *ngIf="!price.valid && price.errors.required"> [required]</span><span *ngIf="!price.valid && price.errors.numericNoValid"> [must be numeric]</span></p>
+        <p>Surface: <input ngControl="surface"><span *ngIf="!surface.valid"> [required]</span></p>
+        <button type="submit">Create</button>
+    </form>   
+</div>

@@ -16,6 +16,7 @@ import {UiErrorState} from "./uiErrorState";
 import {ModalDialogInstance, ModalConfig, Modal, ICustomModal, YesNoModalContent, YesNoModal} from 'angular2-modal';
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from './customModal';
 import {RealEstateAdReduxListComponent} from './redux/realEstateAdReduxList.component'
+import {RealEstateAdReduxInsertComponent} from './redux/realEstateAdReduxInsert.component'
 import {Reducers} from './redux/reducers';
 declare var System: any;
 
@@ -30,7 +31,17 @@ declare var System: any;
     template: `Message : {{uiStateMessage | async}}
          <button  (click)="openDialog('customWindow')">Custom Window</button>
        redux : <br>
-<realEstateAdReduxList></realEstateAdReduxList>
+<table>
+    <tr>
+        <td>
+            <realEstateAdReduxList></realEstateAdReduxList>
+        </td>
+        <td>
+            <realEstateAdReduxInsert></realEstateAdReduxInsert>
+        </td>
+    </tr>
+</table>
+
         <realEstateAdStoreList>   <footer>
     Yet another todo app!
   </footer>
@@ -44,7 +55,7 @@ declare var System: any;
         <router-outlet></router-outlet>
 
     `,
-    directives: [RealEstateAdListComponent, RealEstateAdStoreListComponent, RealEstateAdReduxListComponent, ROUTER_DIRECTIVES]
+    directives: [RealEstateAdReduxInsertComponent,RealEstateAdListComponent, RealEstateAdStoreListComponent, RealEstateAdReduxListComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
         { path: '/list', name: 'RealEstateAdList', component: RealEstateAdListComponent, useAsDefault: true },

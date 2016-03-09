@@ -42,7 +42,7 @@ System.register(['immutable', "angular2/core", "../realEstateAd", './RealEstateA
             Reducers = (function () {
                 function Reducers(realEstateAddBackendService) {
                     this.realEstateAddBackendService = realEstateAddBackendService;
-                    this._realEstateAdds = new Rx_1.Subject();
+                    this._realEstateAdds = new Rx_1.BehaviorSubject(immutable_1.List([]));
                 }
                 Reducers.prototype.realEstateAdds = function () {
                     var _this = this;
@@ -61,6 +61,25 @@ System.register(['immutable', "angular2/core", "../realEstateAd", './RealEstateA
                             });
                             _this._realEstateAdds.next(immutable_1.List(realEstateAdds));
                         }, function (err) { return console.log("Error2 retrieving Todos"); });
+                    }
+                    if (action instanceof RealEstateAdAction_1.AddRealEstateAction) {
+                        var addAction = action;
+                        var obs = this.realEstateAddBackendService.insertAdds(addAction.newRealEstateAd);
+                        obs.map(function (res) { return res.json(); }).subscribe(function (res) {
+                            addAction.newRealEstateAd.id = res.Id;
+                            _this._realEstateAdds.next(_this._realEstateAdds.getValue().push(addAction.newRealEstateAd));
+                        });
+                    }
+                    if (action instanceof RealEstateAdAction_1.DeleteRealEstateAction) {
+                        var deleteAction = action;
+                        var obs = this.realEstateAddBackendService.deleteAdd(deleteAction.deletedRealEstateAd);
+                        obs.subscribe(function (res) {
+                            var realEstateAds = _this._realEstateAdds.getValue().toArray();
+                            var index = realEstateAds.filter(function (realEstateAd) { return realEstateAd.id === deleteAction.deletedRealEstateAd.id; })[0];
+                            var indexOf = realEstateAds.indexOf(index);
+                            realEstateAds.splice(indexOf, 1);
+                            _this._realEstateAdds.next(immutable_1.List(realEstateAds));
+                        });
                     }
                     return this.realEstateAdds();
                     /*

@@ -16,6 +16,7 @@
 /// <reference path="appscript/redux/applicationStateFactory.js" />
 /// <reference path="appscript/redux/di-tokens.js" />
 /// <reference path="appscript/redux/RealEstateAdAction.js" />
+/// <reference path="appscript/redux/realestateadreduxinsert.component.js" />
 /// <reference path="appscript/redux/realEstateAdReduxList.component.js" />
 /// <reference path="appscript/redux/reducers.js" />
 /// <reference path="appscript/uierrorstate.js" />

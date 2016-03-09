@@ -13,7 +13,13 @@ export class AddRealEstateAction {
     constructor(public newRealEstateAd: RealEstateAd) {
 
     }
+}
 
+export class DeleteRealEstateAction {
+
+    constructor(public deletedRealEstateAd: RealEstateAd) {
+
+    }
 }
 
 export class StartBackendAction {
@@ -31,6 +37,6 @@ export class EndBackendAction {
     }
 }
 
-export type Action = LoadRelEstateAdAction | AddRealEstateAction | StartBackendAction | EndBackendAction;
+export type Action = LoadRelEstateAdAction | DeleteRealEstateAction | AddRealEstateAction | StartBackendAction | EndBackendAction;
 
 

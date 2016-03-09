@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Rx';
 import {Observer} from "rxjs/Observer";
 import {dispatcher, state, initialState} from "./di-tokens";
 import {ApplicationState} from "./applicationState";
-import {LoadRelEstateAdAction, AddRealEstateAction, StartBackendAction, EndBackendAction, Action} from "./RealEstateAdAction";
+import {LoadRelEstateAdAction, DeleteRealEstateAction, AddRealEstateAction, StartBackendAction, EndBackendAction, Action} from "./RealEstateAdAction";
 import {RealEstateAddBackendService} from "../RealEstateAddBackendService"
 import {List} from 'immutable';
 
@@ -23,23 +23,18 @@ export class RealEstateAdReduxListComponent {
     private datasource : List<RealEstateAd> ;
 
     constructor( @Inject(dispatcher) private dispatcher: Observer<Action>,
-        @Inject(state) private state: Observable<ApplicationState>,
-        private realEstateAdService: RealEstateAddBackendService) {
+        @Inject(state) private state: Observable<ApplicationState>) {
 
         this.dispatcher.next(new LoadRelEstateAdAction(null));
         this.realEstateAds();
 
-        /*this.realEstateAdService.getAllAdds()
-            .subscribe(
-            res => {
-                let realEstateAdds = (<Object[]>res.json()).map((realEstateAd: any) =>
-                    new RealEstateAd(realEstateAd.Id, realEstateAd.Title, realEstateAd.Description, realEstateAd.Price, realEstateAd.Surface));
-
-                this.dispatcher.next(new LoadRelEstateAdAction(List(realEstateAdds)));
-            },
-            err => console.log("Error2 retrieving Todos")
-            );*/
     }   
+
+    deleteAd(deletedAd: RealEstateAd) {
+        this.dispatcher.next(new DeleteRealEstateAction(deletedAd));
+
+      
+    }
 
      realEstateAds() {
 

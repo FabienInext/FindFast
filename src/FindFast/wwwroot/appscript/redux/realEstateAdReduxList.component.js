@@ -34,23 +34,15 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
             }],
         execute: function() {
             RealEstateAdReduxListComponent = (function () {
-                function RealEstateAdReduxListComponent(dispatcher, state, realEstateAdService) {
+                function RealEstateAdReduxListComponent(dispatcher, state) {
                     this.dispatcher = dispatcher;
                     this.state = state;
-                    this.realEstateAdService = realEstateAdService;
                     this.dispatcher.next(new RealEstateAdAction_1.LoadRelEstateAdAction(null));
                     this.realEstateAds();
-                    /*this.realEstateAdService.getAllAdds()
-                        .subscribe(
-                        res => {
-                            let realEstateAdds = (<Object[]>res.json()).map((realEstateAd: any) =>
-                                new RealEstateAd(realEstateAd.Id, realEstateAd.Title, realEstateAd.Description, realEstateAd.Price, realEstateAd.Surface));
-            
-                            this.dispatcher.next(new LoadRelEstateAdAction(List(realEstateAdds)));
-                        },
-                        err => console.log("Error2 retrieving Todos")
-                        );*/
                 }
+                RealEstateAdReduxListComponent.prototype.deleteAd = function (deletedAd) {
+                    this.dispatcher.next(new RealEstateAdAction_1.DeleteRealEstateAction(deletedAd));
+                };
                 RealEstateAdReduxListComponent.prototype.realEstateAds = function () {
                     var _this = this;
                     return this.state.map(function (state) { return state.getObservableRealEstateAds; }).subscribe((function (res) {
@@ -69,7 +61,7 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
                     }),
                     __param(0, core_1.Inject(di_tokens_1.dispatcher)),
                     __param(1, core_1.Inject(di_tokens_1.state)), 
-                    __metadata('design:paramtypes', [Object, Rx_1.Observable, RealEstateAddBackendService_1.RealEstateAddBackendService])
+                    __metadata('design:paramtypes', [Object, Rx_1.Observable])
                 ], RealEstateAdReduxListComponent);
                 return RealEstateAdReduxListComponent;
             }());

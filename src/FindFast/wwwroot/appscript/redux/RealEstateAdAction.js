@@ -1,7 +1,7 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var LoadRelEstateAdAction, AddRealEstateAction, StartBackendAction, EndBackendAction;
+    var LoadRelEstateAdAction, AddRealEstateAction, DeleteRealEstateAction, StartBackendAction, EndBackendAction;
     return {
         setters:[],
         execute: function() {
@@ -19,6 +19,13 @@ System.register([], function(exports_1, context_1) {
                 return AddRealEstateAction;
             }());
             exports_1("AddRealEstateAction", AddRealEstateAction);
+            DeleteRealEstateAction = (function () {
+                function DeleteRealEstateAction(deletedRealEstateAd) {
+                    this.deletedRealEstateAd = deletedRealEstateAd;
+                }
+                return DeleteRealEstateAction;
+            }());
+            exports_1("DeleteRealEstateAction", DeleteRealEstateAction);
             StartBackendAction = (function () {
                 function StartBackendAction(message) {
                     this.message = message;

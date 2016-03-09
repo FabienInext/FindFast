@@ -9,9 +9,9 @@ import {List} from 'immutable';
 import {RealEstateAd} from "../realEstateAd";
 
 
-function wrapIntoBehaviorSubject(init, obs) {
+function wrapIntoBehaviorSubject(init: ApplicationState, obs:Observable<ApplicationState>) {
     const res = new BehaviorSubject(init);
-    obs.subscribe(s => res.next(s));
+    obs.subscribe(res);
     return res;
 }
 
@@ -23,30 +23,19 @@ export function applicationStateFactory(initialState: ApplicationState, actions:
 
         var realEstateAds;
 
-        let subject: BehaviorSubject<List<RealEstateAd>> = new BehaviorSubject(List<RealEstateAd>());
-        let obs: Observable<List<RealEstateAd>> = new Observable(fn => this.subject.subscribe(fn));
+        //let subject: BehaviorSubject<List<RealEstateAd>> = new BehaviorSubject(List<RealEstateAd>());
+        //let obs: Observable<List<RealEstateAd>> = new Observable(fn => this.subject.subscribe(fn));
 
         let newState: ApplicationState = new ApplicationState(
             state.getRealEstateAds,
             reducers.calculateUiState(state.uiState, action)
         );
 
-        reducers.calculateRealEstateAd(state.getRealEstateAds, action).subscribe((res) => {
-            realEstateAds = res;  
-
-            newState.submitRealEstateAds(realEstateAds);
-           
-
-            /*console.log({
-                realEstateAds: newState.realEstateAds.toJS(),
-                uiState: newState.uiState
-            });*/            
-        }
-        );
+        reducers.calculateRealEstateAd(state.getRealEstateAds, action).subscribe((res) => {           
+            newState.submitRealEstateAds(res);
+        });
 
         return newState;
-
-       
 
     }, initialState)
         .share();

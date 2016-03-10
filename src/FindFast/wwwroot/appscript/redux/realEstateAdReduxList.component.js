@@ -34,20 +34,35 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
             }],
         execute: function() {
             RealEstateAdReduxListComponent = (function () {
-                function RealEstateAdReduxListComponent(dispatcher, state) {
+                function RealEstateAdReduxListComponent(dispatcher, state, cd) {
                     this.dispatcher = dispatcher;
                     this.state = state;
+                    this.cd = cd;
+                    this.index = 0;
                     this.dispatcher.next(new RealEstateAdAction_1.LoadRelEstateAdAction(null));
-                    this.realEstateAds();
                 }
                 RealEstateAdReduxListComponent.prototype.deleteAd = function (deletedAd) {
                     this.dispatcher.next(new RealEstateAdAction_1.DeleteRealEstateAction(deletedAd));
+                };
+                Object.defineProperty(RealEstateAdReduxListComponent.prototype, "sourceData", {
+                    get: function () {
+                        this.index = this.index + 1;
+                        console.log("source data : " + this.index);
+                        return this.datasource;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                RealEstateAdReduxListComponent.prototype.ngOnInit = function () {
+                    this.realEstateAds();
+                    this.cd.markForCheck();
                 };
                 RealEstateAdReduxListComponent.prototype.realEstateAds = function () {
                     var _this = this;
                     return this.state.map(function (state) { return state.getObservableRealEstateAds; }).subscribe((function (res) {
                         res.subscribe(function (r) {
                             _this.datasource = r;
+                            _this.cd.markForCheck();
                         });
                     }));
                     //.map( (res:List<RealEstateAd>) => new Array()); 
@@ -57,11 +72,12 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
                     core_1.Component({
                         selector: 'realEstateAdReduxList',
                         templateUrl: 'appscript/redux/realEstateAdReduxList.component.html',
-                        providers: [RealEstateAddBackendService_1.RealEstateAddBackendService]
+                        providers: [RealEstateAddBackendService_1.RealEstateAddBackendService],
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     }),
                     __param(0, core_1.Inject(di_tokens_1.dispatcher)),
                     __param(1, core_1.Inject(di_tokens_1.state)), 
-                    __metadata('design:paramtypes', [Object, Rx_1.Observable])
+                    __metadata('design:paramtypes', [Object, Rx_1.Observable, core_1.ChangeDetectorRef])
                 ], RealEstateAdReduxListComponent);
                 return RealEstateAdReduxListComponent;
             }());

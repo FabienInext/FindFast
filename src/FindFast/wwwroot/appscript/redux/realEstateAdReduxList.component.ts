@@ -1,6 +1,6 @@
 ﻿
 import {Component, provide, ElementRef, Injector,
-    IterableDiffers, KeyValueDiffers,Inject, Renderer, OnInit, Output, EventEmitter, forwardRef} from 'angular2/core';
+    IterableDiffers, ChangeDetectorRef,ChangeDetectionStrategy, KeyValueDiffers,Inject, Renderer, OnInit, Output, EventEmitter, forwardRef} from 'angular2/core';
 import {Control} from 'angular2/common';
 import {RealEstateAdService} from '../realEstateAdService';
 import {RealEstateAd} from "../realEstateAd"
@@ -16,24 +16,34 @@ import {List} from 'immutable';
 @Component({
     selector: 'realEstateAdReduxList',
     templateUrl: 'appscript/redux/realEstateAdReduxList.component.html',
-    providers: [RealEstateAddBackendService]
+    providers: [RealEstateAddBackendService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
         
 })
-export class RealEstateAdReduxListComponent {
-    private datasource : List<RealEstateAd> ;
+export class RealEstateAdReduxListComponent implements OnInit {
+    private datasource: List<RealEstateAd>;
+    private index: number = 0;
 
     constructor( @Inject(dispatcher) private dispatcher: Observer<Action>,
-        @Inject(state) private state: Observable<ApplicationState>) {
+        @Inject(state) private state: Observable<ApplicationState>, private cd: ChangeDetectorRef) {
 
         this.dispatcher.next(new LoadRelEstateAdAction(null));
-        this.realEstateAds();
-
     }   
 
     deleteAd(deletedAd: RealEstateAd) {
-        this.dispatcher.next(new DeleteRealEstateAction(deletedAd));
+        this.dispatcher.next(new DeleteRealEstateAction(deletedAd));      
+    }
 
-      
+    get sourceData() {
+        this.index = this.index + 1;
+        console.log("source data : " + this.index);
+        
+        return this.datasource;
+    }
+
+    ngOnInit() {
+        this.realEstateAds();
+        this.cd.markForCheck();
     }
 
      realEstateAds() {
@@ -42,6 +52,7 @@ export class RealEstateAdReduxListComponent {
             ((res) => {
                 res.subscribe((r) => {
                     this.datasource = r
+                    this.cd.markForCheck();
                 });
             }));
         

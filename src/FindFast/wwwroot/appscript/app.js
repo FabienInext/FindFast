@@ -49,8 +49,10 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_realEstateAddStore, _realEstateAdService, uiStateStore, modal, injector, _renderer) {
+                function AppComponent(elementRef, loader, _realEstateAddStore, _realEstateAdService, uiStateStore, modal, injector, _renderer) {
                     var _this = this;
+                    this.elementRef = elementRef;
+                    this.loader = loader;
                     this._realEstateAddStore = _realEstateAddStore;
                     this._realEstateAdService = _realEstateAdService;
                     this.uiStateStore = uiStateStore;
@@ -64,6 +66,11 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             _this.openDialogError(); });
                     });
                 }
+                AppComponent.prototype.ngOnInit = function () {
+                };
+                AppComponent.prototype.AddInsertComponent = function () {
+                    this.loader.loadIntoLocation(realEstateAdReduxInsert_component_1.RealEstateAdReduxInsertComponent, this.elementRef, 'container');
+                };
                 AppComponent.prototype.ngAfterViewInit = function () {
                     var list = this.inputComponent.realEstateAdList;
                 };
@@ -124,7 +131,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             core_1.provide(RealEstateAdStore_1.RealEstateAddStore, { useClass: RealEstateAdStore_1.RealEstateAddStore }),
                             angular2_modal_1.Modal
                         ],
-                        template: "Message : {{uiStateMessage | async}}\n         <button  (click)=\"openDialog('customWindow')\">Custom Window</button>\n       redux : <br>\n<table>\n    <tr>\n        <td>\n            <realEstateAdReduxList></realEstateAdReduxList>\n        </td>\n        <td>\n            <realEstateAdReduxInsert></realEstateAdReduxInsert>\n        </td>\n    </tr>\n</table>\n\n        <realEstateAdStoreList>   <footer>\n    Yet another todo app!\n  </footer>\n<footer>\n    Yet another todo app2!\n  </footer></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
+                        template: "Message : {{uiStateMessage | async}}\n         <button  (click)=\"openDialog('customWindow')\">Custom Window</button>\n       redux : <br>\n<table>\n    <tr>\n        <td>\n            <realEstateAdReduxList></realEstateAdReduxList>\n        </td>\n        <td>\n            <button (click)=\"AddInsertComponent()\">Add insert</button>\n            <div #container></div>\n           \n        </td>\n    </tr>\n</table>\n\n        <realEstateAdStoreList>   <footer>\n    Yet another todo app!\n  </footer>\n<footer>\n    Yet another todo app2!\n  </footer></realEstateAdStoreList>\n        XXX\n        <a [routerLink]=\"['RealEstateAdList']\">Back</a>\n        <a [routerLink]=\"['RealEstateAdAdd']\">Add</a>\n        <p>Number of Add  : {{realEstateAdCount}}</p>\n        <router-outlet></router-outlet>\n\n    ",
                         directives: [realEstateAdReduxInsert_component_1.RealEstateAdReduxInsertComponent, realEstateAdList_component_1.RealEstateAdListComponent, realEstateAdStoreList_component_1.RealEstateAdStoreListComponent, realEstateAdReduxList_component_1.RealEstateAdReduxListComponent, router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
@@ -135,7 +142,7 @@ System.register(['angular2/core', './realEstateAdService', "./realEstateAdList.c
                             name: 'RealEstateAdAdd'
                         })
                     ]), 
-                    __metadata('design:paramtypes', [RealEstateAdStore_1.RealEstateAddStore, realEstateAdService_1.RealEstateAdService, uiStateStore_1.UiStateStore, angular2_modal_1.Modal, core_1.Injector, core_1.Renderer])
+                    __metadata('design:paramtypes', [core_1.ElementRef, core_1.DynamicComponentLoader, RealEstateAdStore_1.RealEstateAddStore, realEstateAdService_1.RealEstateAdService, uiStateStore_1.UiStateStore, angular2_modal_1.Modal, core_1.Injector, core_1.Renderer])
                 ], AppComponent);
                 return AppComponent;
             }());

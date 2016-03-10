@@ -1,4 +1,4 @@
-﻿import {Component, OnInit, provide, ComponentRef,ElementRef, Injector,
+﻿import {Component, OnInit, provide, DynamicComponentLoader,ComponentRef,ElementRef, Injector,
     IterableDiffers, KeyValueDiffers, Renderer, ViewChild, ViewChildren} from 'angular2/core';
 
 import {RealEstateAdService} from './realEstateAdService';
@@ -37,7 +37,9 @@ declare var System: any;
             <realEstateAdReduxList></realEstateAdReduxList>
         </td>
         <td>
-            <realEstateAdReduxInsert></realEstateAdReduxInsert>
+            <button (click)="AddInsertComponent()">Add insert</button>
+            <div #container></div>
+           
         </td>
     </tr>
 </table>
@@ -75,20 +77,29 @@ declare var System: any;
     name: 'about'
   })
 ])*/
-export class AppComponent {
+export class AppComponent implements OnInit {
     @ViewChild(RealEstateAdStoreListComponent)
     inputComponent: RealEstateAdStoreListComponent
 
     private realEstateAdCount: number;
 
-    constructor(private _realEstateAddStore: RealEstateAddStore,private _realEstateAdService: RealEstateAdService,
+    constructor(private elementRef: ElementRef, private loader: DynamicComponentLoader,private _realEstateAddStore: RealEstateAddStore,private _realEstateAdService: RealEstateAdService,
         private uiStateStore: UiStateStore, private modal: Modal,private injector: Injector, private _renderer: Renderer) {
         this._realEstateAdService.countAdd$.subscribe((res: number) => {
             this.realEstateAdCount = res;
-
             this.uiStateStore.uiErrorState.map((uiErrorState: UiErrorState) => uiErrorState.errorMessage)
                 .subscribe((error) => { if (error) this.openDialogError() });
         });
+        
+        
+    }
+
+    ngOnInit() {
+      
+    }
+
+    AddInsertComponent() {
+        this.loader.loadIntoLocation(RealEstateAdReduxInsertComponent, this.elementRef, 'container');
     }
 
     ngAfterViewInit() {

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FindFast</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <!-- 1. Load libraries -->
+    
+    <script src="libs/system-polyfills.js"></script>
+    <script src="libs/angular2-polyfills.js"></script>
+    <script src="libs/system.js"></script>
+    <script src="libs/rx.js"></script>
+    <script src="libs/angular2.dev.js"></script>
+    <script src="libs/http.dev.js"></script>
+    <!--<script src="libs/angular2-infinite-scroll.js"></script>-->
+    <script src="libs/router.dev.js"></script>
+    <script src="libs/immutable.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/site.css" />
+
+    <script>
+        "use strict";
+        System.config({
+             /*meta: {
+
+                'libs/angular2-infinite-scroll.js': {
+                format: 'global',
+                exports: 'angular2-infinite-scroll'
+              }
+            },*/
+            packages: {
+                appscript: {
+                    defaultExtension: 'js',
+                    map: {
+                        'angular2-modal' : 'libs/angular2-modal',
+                        'angular2-infinite-scroll' : 'libs/angular2-infinite-scroll',
+                        'immutable' : 'libs/immutable.js'
+                }
+            },
+
+            'libs/angular2-modal' :{
+                defaultExtension: 'js',
+                main: 'index.js'
+            },
+             'libs/angular2-infinite-scroll' :{
+                defaultExtension: 'js',
+                main : 'angular2-infinite-scroll.js'
+            }
+        }});
+    </script>
+    <script>
+
+        System.import('appscript/boot')
+              .then(null, console.error.bind(console));
+
+    </script>
+</head>
+<body>
+   
+       <my-app>Loading...</my-app>
+              
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

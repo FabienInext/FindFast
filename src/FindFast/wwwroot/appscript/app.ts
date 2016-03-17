@@ -18,6 +18,7 @@ import {AdditionCalculateWindowData, AdditionCalculateWindow} from './customModa
 import {RealEstateAdReduxListComponent} from './redux/realEstateAdReduxList.component'
 import {RealEstateAdReduxInsertComponent} from './redux/realEstateAdReduxInsert.component'
 import {Reducers} from './redux/reducers';
+import {AppReduxComponent} from './redux/appredux'
 declare var System: any;
 
 
@@ -28,36 +29,8 @@ declare var System: any;
         provide(RealEstateAddStore, { useClass: RealEstateAddStore }),             
         Modal
     ],
-    template: `Message : {{uiStateMessage | async}}
-         <button  (click)="openDialog('customWindow')">Custom Window</button>
-       redux : <br>
-<table>
-    <tr>
-        <td>
-            <realEstateAdReduxList></realEstateAdReduxList>
-        </td>
-        <td>
-            <button (click)="AddInsertComponent()">Add insert</button>
-            <div #container></div>
-           
-        </td>
-    </tr>
-</table>
-
-        <realEstateAdStoreList>   <footer>
-    Yet another todo app!
-  </footer>
-<footer>
-    Yet another todo app2!
-  </footer></realEstateAdStoreList>
-        XXX
-        <a [routerLink]="['RealEstateAdList']">Back</a>
-        <a [routerLink]="['RealEstateAdAdd']">Add</a>
-        <p>Number of Add  : {{realEstateAdCount}}</p>
-        <router-outlet></router-outlet>
-
-    `,
-    directives: [RealEstateAdReduxInsertComponent,RealEstateAdListComponent, RealEstateAdStoreListComponent, RealEstateAdReduxListComponent, ROUTER_DIRECTIVES]
+    templateUrl: 'appscript/app.html',  
+    directives: [AppReduxComponent,RealEstateAdReduxInsertComponent,RealEstateAdListComponent, RealEstateAdStoreListComponent, RealEstateAdReduxListComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
         { path: '/list', name: 'RealEstateAdList', component: RealEstateAdListComponent, useAsDefault: true },

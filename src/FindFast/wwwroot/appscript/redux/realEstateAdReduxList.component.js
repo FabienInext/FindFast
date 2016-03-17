@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdAction", "../RealEstateAddBackendService"], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdAction", "../RealEstateAddBackendService", '../directives/highlight.directive'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, Rx_1, di_tokens_1, RealEstateAdAction_1, RealEstateAddBackendService_1;
+    var core_1, Rx_1, di_tokens_1, RealEstateAdAction_1, RealEstateAddBackendService_1, highlight_directive_1;
     var RealEstateAdReduxListComponent;
     return {
         setters:[
@@ -31,6 +31,9 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
             },
             function (RealEstateAddBackendService_1_1) {
                 RealEstateAddBackendService_1 = RealEstateAddBackendService_1_1;
+            },
+            function (highlight_directive_1_1) {
+                highlight_directive_1 = highlight_directive_1_1;
             }],
         execute: function() {
             RealEstateAdReduxListComponent = (function () {
@@ -74,6 +77,7 @@ System.register(['angular2/core', 'rxjs/Rx', "./di-tokens", "./RealEstateAdActio
                         templateUrl: 'appscript/redux/realEstateAdReduxList.component.html',
                         providers: [RealEstateAddBackendService_1.RealEstateAddBackendService],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                        directives: [highlight_directive_1.HighlightDirective]
                     }),
                     __param(0, core_1.Inject(di_tokens_1.dispatcher)),
                     __param(1, core_1.Inject(di_tokens_1.state)), 

@@ -12,13 +12,14 @@ import {ApplicationState} from "./applicationState";
 import {LoadRelEstateAdAction, DeleteRealEstateAction, AddRealEstateAction, StartBackendAction, EndBackendAction, Action} from "./RealEstateAdAction";
 import {RealEstateAddBackendService} from "../RealEstateAddBackendService"
 import {List} from 'immutable';
+import {HighlightDirective} from '../directives/highlight.directive'
 
 @Component({
     selector: 'realEstateAdReduxList',
     templateUrl: 'appscript/redux/realEstateAdReduxList.component.html',
     providers: [RealEstateAddBackendService],
     changeDetection: ChangeDetectionStrategy.OnPush,
-        
+    directives: [HighlightDirective]
 })
 export class RealEstateAdReduxListComponent implements OnInit {
     private datasource: List<RealEstateAd>;

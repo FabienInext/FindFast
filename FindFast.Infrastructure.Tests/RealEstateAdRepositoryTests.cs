@@ -24,10 +24,10 @@ namespace FindFast.Infrastructure.Tests
         {
             var realEstate = new RealEstate
             {
-                Title = "Test title",
-                Description = "Test description",
-                Price = 1234,
-                Surface = 38
+                Title = "VENTE APPARTEMENT 3 PIÈCES GAILLARD",
+                Description = "Secteur très calme, à 2 minutes de la douane, au dernier étage, appartement atypique en duplex d'environ 70 m² utiles comprenant entrée avec placards, WC visiteur, lumineuse pièce à vivre avec balcon exposé Sud Est, belle vue dégagée, cuisine indépendante. A l'étage une chambre avec placards, une salle de bains, une mezzanine pouvant servir de chambre ou de bureau. Une cave et 2 places de parkings.",
+                Price = 243000,
+                Surface = 70
             };
 
             var repo = new RealEstateAdRepository();

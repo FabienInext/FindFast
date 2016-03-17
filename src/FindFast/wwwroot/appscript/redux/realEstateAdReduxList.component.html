@@ -1,35 +1,28 @@
 ﻿
-<div>
-    
-    <table> 
-        <tr>
-            <td>
-                <table>
+<div class="row" *ngFor="#realEstateAd of sourceData ">
+    <div class="h4 col-md-6 col-xs-12">
+        {{realEstateAd.title}}
+    </div>
+    <div class=" h4 col-md-3 hidden-xs ">
+        Prix : {{realEstateAd.price}}
+    </div>
+    <div class=" h4 col-md-2 hidden-xs">
+        Surface : {{realEstateAd.surface}}
+    </div>
+    <div class="col-md-1 hidden-xs">
+        <a (click)="deleteAd(realEstateAd)"><span class="glyphicon glyphicon-remove-sign"></span></a>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        {{realEstateAd.description}}
+    </div>
+    <div class="col-xs-6 hidden-md ">
+        Prix : {{realEstateAd.price}}
+     </div>
+    <div class="col-xs-6 hidden-md">
+        Surface : {{realEstateAd.surface}}
+    </div>
+    <div class="col-xs-2 hidden-md">        
+        <a   (click)="deleteAd(realEstateAd)"><span class="glyphicon glyphicon-remove-sign"></span></a>
+    </div>
 
-                    <thead>
-                        <tr>
-                            <td>Redux</td>
-                        </tr>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Surface</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                     
-                        <tr *ngFor="#realEstateAd of sourceData ">
-                            <td>{{realEstateAd.title}}</td>
-                            <td>{{realEstateAd.description}}</td>
-                            <td>{{realEstateAd.price}}</td>
-                            <td>{{realEstateAd.surface}}</td>
-                            <td><a (click)="deleteAd(realEstateAd)">delete</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-            
-        </tr>
-    </table>
 </div>

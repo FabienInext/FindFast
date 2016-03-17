@@ -49,7 +49,7 @@ export class Reducers {
         obs.map((res) => res.json()).subscribe(
             (res: any) => {
                 addAction.newRealEstateAd.id = res.Id;
-                this._realEstateAdds.next(this._realEstateAdds.getValue().push(addAction.newRealEstateAd);
+                this._realEstateAdds.next(this._realEstateAdds.getValue().push(addAction.newRealEstateAd));
             });
     }
 

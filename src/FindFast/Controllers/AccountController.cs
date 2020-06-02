@@ -45,7 +45,7 @@ namespace FindFast.Controllers
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            var test2 = "";
+            var test4 = "";
             return View();
         }
 
